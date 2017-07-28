@@ -15,9 +15,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var stepsLbl: UILabel!
     var realm = try! Realm()
     var recipe = Resipe()
-   
+    var a = ""
+    var b = ""
+    var c = ""
+    override func viewWillAppear(_ animated: Bool) {
+        print(recipe)
+        self.navigationController?.title = "gujgh"
+        ingredientsLbl?.text = recipe.ingredience
+        stepsLbl.text = recipe.steps
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 //        navigationController?.title = a //recipe.title
 //        ingredientsLbl.text = b //recipe.ingredience
 //        stepsLbl.text = c //recipe.steps

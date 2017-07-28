@@ -112,7 +112,7 @@
                                 <connections>
                                     <outlet property="resipeImage" destination="SX2-mT-DVF" id="mS5-vn-SOj"/>
                                     <outlet property="resipeTitle" destination="pg0-ua-C3l" id="BeD-s6-RFt"/>
-                                    <segue destination="WPi-Jl-gcy" kind="show" identifier="" id="w37-H9-4sa"/>
+                                    <segue destination="WPi-Jl-gcy" kind="show" identifier="goToDetailVC" id="w37-H9-4sa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -136,7 +136,7 @@
         <!--Detail View Controller-->
         <scene sceneID="BWs-yz-fOO">
             <objects>
-                <viewController storyboardIdentifier="View Detail" id="WPi-Jl-gcy" customClass="DetailViewController" customModule="WorkWithRealm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewDetail" id="WPi-Jl-gcy" customClass="DetailViewController" customModule="WorkWithRealm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GKI-np-b2F"/>
                         <viewControllerLayoutGuide type="bottom" id="h5x-Ih-f9B"/>
@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yj0-Gx-4pT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1784.8" y="716.49175412293857"/>
+            <point key="canvasLocation" x="1785" y="779"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pDc-kd-uQ1">

@@ -17,15 +17,14 @@ class MyTableViewController: UITableViewController {
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
     var selectedResipe = Resipe()
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         populateDefaultResipes()
-        
-        
     }
     
     func populateDefaultResipes() {
@@ -52,13 +51,11 @@ class MyTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         print(resipes.count)
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return resipes.count
     }
     
@@ -67,7 +64,6 @@ class MyTableViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? ResipeTableViewCell {
             let resipe = resipes[indexPath.row]
             cell.configureCell(resipe: resipe)
-            
             return cell
         }else{
             return ResipeTableViewCell()
@@ -77,9 +73,16 @@ class MyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedResipe = resipes[indexPath.row]
-        let viewDetails = DetailViewController() //= self.storyboard?.instantiateViewController(withIdentifier: "View Detail") as! DetailViewController
-        viewDetails.fillUI(recipe: selectedResipe)
+        selectedResipe = resipes[indexPath.row]
+        
+        
+        
+//        let viewDetails = DetailViewController() //= self.storyboard?.instantiateViewController(withIdentifier: "View Detail") as! DetailViewController
+//        viewDetails.a = "1"
+//        viewDetails.b = "2"
+//        viewDetails.c = "3"
+//        self.present(viewDetails, animated: true, completion: nil)
+//        viewDetails.fillUI(recipe: selectedResipe)
         //print(selectedResipe)
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -102,9 +105,7 @@ class MyTableViewController: UITableViewController {
                 realm.delete(self.resipes[indexPath.row])
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }// else if editingStyle == .insert {
-        //            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        //        }
+        }
     }
     
     
@@ -123,14 +124,14 @@ class MyTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+ 
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "goToDetailVC"{
+            var ditailController = segue.destination as! DetailViewController
+            // your new view controller should have property that will store passed value
+            ditailController.recipe = selectedResipe
+        }
      }
-     */
+ 
     
 }
