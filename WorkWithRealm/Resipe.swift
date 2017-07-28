@@ -11,4 +11,7 @@ import RealmSwift
 
 class Resipe : Object {
     dynamic var title = ""
+    dynamic var ingredience = ""
+    dynamic var steps = ""
+   // dynamic var image = Data()
 }

@@ -20,11 +20,14 @@ class MyTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let defaultPath = Realm.Configuration.defaultConfiguration.fileURL
+       // try FileManager.defaultManager.removeItemAtPath(defaultPath)
         
         populateDefaultResipes()
                 
         
     }
+    
     func populateDefaultResipes() {
      print(resipes.count)
         if resipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record

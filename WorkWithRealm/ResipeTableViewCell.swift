@@ -10,10 +10,12 @@ import UIKit
 
 class ResipeTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!
    
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
+       // recipeImage.image = recipe.getRecipeImg()
     }
 
 }
