@@ -23,21 +23,20 @@ class DetailViewController: UIViewController {
 //        stepsLbl.text = c //recipe.steps
     }
     func fillUI(recipe: Resipe){
-//      //  print(recipe.title)
-//        self.recipe = recipe
-//        print(self.recipe)
-////        let rec = realm.objects(Resipe)
-////        let y = rec.filter(recipe.title)
-////        print(y)
-////        print(rec)
-//        
-//        
-//        
-//        
-//        navigationController?.title = recipe.title
-//        ingredientsLbl.text = recipe.ingredience
-//        stepsLbl.text = recipe.steps
-//        print(recipe)
+      //  print(recipe.title)
+        self.recipe = recipe
+        print(self.recipe)
+//        try! realm.write {
+//            self.navigationController?.title = recipe.title
+//            self.ingredientsLbl.text = recipe.ingredience
+//            self.stepsLbl.text = recipe.steps
+//        }
+        
+        
+        
+        
+        
+        print(recipe)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

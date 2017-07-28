@@ -44,8 +44,6 @@ class CreatingResipeViewController: UIViewController {
             if realm.refresh(){
                 print("true")
             }
-            
-            realm.autorefresh = true
             self.navigationController?.popViewController(animated: true)
         }
         if title == "" || ingredients == "" || steps == "" {

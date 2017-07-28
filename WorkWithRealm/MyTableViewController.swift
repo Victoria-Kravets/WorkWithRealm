@@ -12,18 +12,16 @@ class MyTableViewController: UITableViewController {
     
     let realm = try! Realm()
     
-    lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe)}()
+    lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe.self)}()
     // creating instance Realm, fill categories througvarbjects(_:)
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
     var selectedResipe = Resipe()
     override func viewWillAppear(_ animated: Bool) {
-        realm.autorefresh = true
+        tableView.reloadData()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        let defaultPath = Realm.Configuration.defaultConfiguration.fileURL
-        // try FileManager.defaultManager.removeItemAtPath(defaultPath)
         
         populateDefaultResipes()
         
@@ -77,6 +75,7 @@ class MyTableViewController: UITableViewController {
         
         
     }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedResipe = resipes[indexPath.row]
         let viewDetails = DetailViewController() //= self.storyboard?.instantiateViewController(withIdentifier: "View Detail") as! DetailViewController
