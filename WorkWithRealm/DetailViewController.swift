@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 class DetailViewController: UIViewController {
 
+    @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var ingredientsLbl: UILabel!
     @IBOutlet weak var stepsLbl: UILabel!
@@ -21,7 +22,8 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         print(recipe)
         self.navigationController?.title = "gujgh"
-        ingredientsLbl?.text = recipe.ingredience
+        titleLbl.text = recipe.title
+        ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
     }
     override func viewDidLoad() {
@@ -35,16 +37,6 @@ class DetailViewController: UIViewController {
       //  print(recipe.title)
         self.recipe = recipe
         print(self.recipe)
-//        try! realm.write {
-//            self.navigationController?.title = recipe.title
-//            self.ingredientsLbl.text = recipe.ingredience
-//            self.stepsLbl.text = recipe.steps
-//        }
-        
-        
-        
-        
-        
         print(recipe)
     }
     override func didReceiveMemoryWarning() {
