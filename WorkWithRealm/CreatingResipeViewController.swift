@@ -41,6 +41,12 @@ class CreatingResipeViewController: UIViewController {
                 newResipe.steps = resipeIngredients.text!
                 self.realm.add(newResipe)
             }
+            if realm.refresh(){
+                print("true")
+            }
+            
+            realm.autorefresh = true
+            self.navigationController?.popViewController(animated: true)
         }
         if title == "" || ingredients == "" || steps == "" {
             createAlert(title: "Warning", massage: "Please fill all textFields!")

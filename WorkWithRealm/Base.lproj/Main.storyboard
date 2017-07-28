@@ -57,13 +57,13 @@
                                     <action selector="addImage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4XA-yt-vTi"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lR-ST-IGJ">
-                                <rect key="frame" x="114" y="454" width="146" height="53"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pd0-xL-Zj6">
+                                <rect key="frame" x="104" y="473" width="167" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Create resipe"/>
                                 <connections>
-                                    <action selector="createResipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fy8-dq-tmL"/>
+                                    <action selector="createResipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dof-KI-bW5"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -121,14 +121,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Resipe Book" id="6Bi-Tc-XRM">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="vF4-fl-oZ6">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vk8-O5-B32">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="+ NEW"/>
-                            </button>
+                        <barButtonItem key="rightBarButtonItem" title="+ NEW" id="Cy5-pB-meB">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="CZ8-o8-zci"/>
+                                <segue destination="BYZ-38-t0r" kind="show" id="2zk-UU-ouL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

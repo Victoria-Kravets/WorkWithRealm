@@ -17,7 +17,9 @@ class MyTableViewController: UITableViewController {
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
     var selectedResipe: Resipe!
-    
+    override func viewWillAppear(_ animated: Bool) {
+        realm.autorefresh = true
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         let defaultPath = Realm.Configuration.defaultConfiguration.fileURL
@@ -49,6 +51,10 @@ class MyTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    @IBAction func addNewResipe(_ sender: Any) {
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "goToNextVC")
+        self.navigationController?.present(vc!, animated: true, completion: nil)
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         print(resipes.count)
