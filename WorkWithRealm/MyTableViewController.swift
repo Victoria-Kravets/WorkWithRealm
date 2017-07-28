@@ -60,12 +60,16 @@ class MyTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? ResipeTableViewCell {
+            let category = categories[indexPath.row]
+            cell.configureCell(resipe: category)
+            
+            return cell
+        }else{
+                return ResipeTableViewCell()
+        }
         
-        let category = categories[indexPath.row]
-        cell.textLabel?.text = category.name
         
-        return cell
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectedCategory = categories[indexPath.row]
