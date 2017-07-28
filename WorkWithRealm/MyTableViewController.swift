@@ -13,10 +13,10 @@ class MyTableViewController: UITableViewController {
     let realm = try! Realm()
     
     lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe)}()
-    // creating instance Realm, fill categories through objects(_:)
+    // creating instance Realm, fill categories througvarbjects(_:)
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
-    var selectedResipe: Resipe!
+    var selectedResipe = Resipe()
     override func viewWillAppear(_ animated: Bool) {
         realm.autorefresh = true
     }
@@ -36,11 +36,13 @@ class MyTableViewController: UITableViewController {
             
             try! realm.write() { // adding records to database
                 
-                let defaultResipes = ["Birds", "Mammals", "Flora", "Reptiles", "Arachnids" ] // creating default names of categories
+                let defaultResipes = [["Chocolate Cake", "1", "1"], ["Pizza", "1", "1"], ["Gamburger", "1", "1"], ["Spagetti", "1", "1"], ["Sushi", "1", "1"]] // creating default names of categories
                 
                 for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
                     let newResipe = Resipe()
-                    newResipe.title = resipe
+                    newResipe.title = resipe[0]
+                    newResipe.ingredience = resipe[1]
+                    newResipe.steps = resipe[2]
                     self.realm.add(newResipe)
                 }
             }
@@ -75,8 +77,15 @@ class MyTableViewController: UITableViewController {
         
         
     }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedResipe = resipes[indexPath.row]
+        let viewDetails = DetailViewController() //= self.storyboard?.instantiateViewController(withIdentifier: "View Detail") as! DetailViewController
+        viewDetails.fillUI(recipe: selectedResipe)
+        //print(selectedResipe)
+    }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectedResipe = resipes[indexPath.row]
+        print(resipes[indexPath.row].title)
         return indexPath
     }
     

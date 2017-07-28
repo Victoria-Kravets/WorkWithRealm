@@ -14,4 +14,5 @@ class Resipe : Object {
     dynamic var ingredience = ""
     dynamic var steps = ""
    // dynamic var image = Data()
+    
 }

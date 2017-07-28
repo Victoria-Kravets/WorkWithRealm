@@ -112,6 +112,7 @@
                                 <connections>
                                     <outlet property="resipeImage" destination="SX2-mT-DVF" id="mS5-vn-SOj"/>
                                     <outlet property="resipeTitle" destination="pg0-ua-C3l" id="BeD-s6-RFt"/>
+                                    <segue destination="WPi-Jl-gcy" kind="show" identifier="" id="w37-H9-4sa"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -131,6 +132,79 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeA-fC-0Yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1784.8" y="43.628185907046479"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="BWs-yz-fOO">
+            <objects>
+                <viewController storyboardIdentifier="View Detail" id="WPi-Jl-gcy" customClass="DetailViewController" customModule="WorkWithRealm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GKI-np-b2F"/>
+                        <viewControllerLayoutGuide type="bottom" id="h5x-Ih-f9B"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BXG-GQ-tUd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hc0-Qv-rKL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mnC-3z-Zfc">
+                                        <rect key="frame" x="54" y="36" width="267" height="198"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="198" id="sGP-6W-dnS"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingregients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWL-eP-WQF">
+                                        <rect key="frame" x="54" y="263" width="280" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="2HM-ls-4pA"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFe-iY-9H5">
+                                        <rect key="frame" x="54" y="307" width="280" height="27"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="tgm-xn-O4i"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="mnC-3z-Zfc" secondAttribute="trailing" constant="54" id="7dF-Dt-Avk"/>
+                                    <constraint firstItem="mnC-3z-Zfc" firstAttribute="top" secondItem="Hc0-Qv-rKL" secondAttribute="top" constant="36" id="8KC-W5-f2x"/>
+                                    <constraint firstAttribute="trailing" secondItem="LWL-eP-WQF" secondAttribute="trailing" constant="41" id="8ac-fd-oPn"/>
+                                    <constraint firstItem="LWL-eP-WQF" firstAttribute="leading" secondItem="lFe-iY-9H5" secondAttribute="leading" id="Gsn-kk-cUN"/>
+                                    <constraint firstItem="mnC-3z-Zfc" firstAttribute="leading" secondItem="Hc0-Qv-rKL" secondAttribute="leading" constant="54" id="JQ7-zU-ema"/>
+                                    <constraint firstAttribute="bottom" secondItem="lFe-iY-9H5" secondAttribute="bottom" constant="333" id="PkE-q9-wFU"/>
+                                    <constraint firstItem="LWL-eP-WQF" firstAttribute="trailing" secondItem="lFe-iY-9H5" secondAttribute="trailing" id="bCJ-l9-iQj"/>
+                                    <constraint firstItem="LWL-eP-WQF" firstAttribute="top" secondItem="mnC-3z-Zfc" secondAttribute="bottom" constant="29" id="i5P-YH-IWc"/>
+                                    <constraint firstItem="mnC-3z-Zfc" firstAttribute="leading" secondItem="LWL-eP-WQF" secondAttribute="leading" id="jzG-H7-nig"/>
+                                    <constraint firstItem="lFe-iY-9H5" firstAttribute="top" secondItem="LWL-eP-WQF" secondAttribute="bottom" constant="17" id="nOX-LL-bMF"/>
+                                    <constraint firstItem="mnC-3z-Zfc" firstAttribute="centerX" secondItem="Hc0-Qv-rKL" secondAttribute="centerX" id="wRd-pb-vfx"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Hc0-Qv-rKL" firstAttribute="bottom" secondItem="h5x-Ih-f9B" secondAttribute="top" id="527-o8-BMY"/>
+                            <constraint firstAttribute="trailing" secondItem="Hc0-Qv-rKL" secondAttribute="trailing" id="M5z-g3-Mq8"/>
+                            <constraint firstItem="Hc0-Qv-rKL" firstAttribute="leading" secondItem="BXG-GQ-tUd" secondAttribute="leading" id="gaN-xQ-7Mm"/>
+                            <constraint firstItem="Hc0-Qv-rKL" firstAttribute="top" secondItem="BXG-GQ-tUd" secondAttribute="top" id="hyd-Yp-zuw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="mnC-3z-Zfc" id="gs9-IL-Y68"/>
+                        <outlet property="ingredientsLbl" destination="LWL-eP-WQF" id="fti-jD-eKS"/>
+                        <outlet property="stepsLbl" destination="lFe-iY-9H5" id="to5-sf-ko3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yj0-Gx-4pT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1784.8" y="716.49175412293857"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pDc-kd-uQ1">
