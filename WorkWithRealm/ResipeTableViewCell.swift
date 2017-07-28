@@ -12,8 +12,8 @@ class ResipeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var resipeTitle: UILabel!
    
-    func configureCell(resipe: Category){
-        resipeTitle.text = resipe.name
+    func configureCell(resipe: Resipe){
+        resipeTitle.text = resipe.title
     }
 
 }

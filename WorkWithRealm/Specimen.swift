@@ -9,11 +9,11 @@
 import Foundation
 import RealmSwift
 
-class Specimen: Object {
-    dynamic var name = ""
-    dynamic var specimenDescription = ""
-    dynamic var latitude = 0.0
-    dynamic var longitude = 0.0
-    dynamic var created = NSDate()
-    dynamic var category: Category!
-}
+//class Specimen: Object {
+//    dynamic var name = ""
+//    dynamic var specimenDescription = ""
+//    dynamic var latitude = 0.0
+//    dynamic var longitude = 0.0
+//    dynamic var created = NSDate()
+//    dynamic var category: Category!
+//}

@@ -12,36 +12,35 @@ class MyTableViewController: UITableViewController {
     
     let realm = try! Realm()
     
-    lazy var categories: Results<Category> = {self.realm.objects(Category)}()
+    lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe)}()
     // creating instance Realm, fill categories through objects(_:)
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
-    var selectedCategory: Category!
+    var selectedResipe: Resipe!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        populateDefaultCategories()
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
-        
+        populateDefaultResipes()
+                
         
     }
-    func populateDefaultCategories() {
-     print(categories.count)
-        if categories.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
+    func populateDefaultResipes() {
+     print(resipes.count)
+        if resipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
             
             try! realm.write() { // adding records to database
                 
-                let defaultCategories = ["Birds", "Mammals", "Flora", "Reptiles", "Arachnids" ] // creating default names of categories
+                let defaultResipes = ["Birds", "Mammals", "Flora", "Reptiles", "Arachnids" ] // creating default names of categories
                 
-                for category in defaultCategories { // creating new instance for each category, fill properties adn adding object to realm
-                    let newCategory = Category()
-                    newCategory.name = category
-                    self.realm.add(newCategory)
+                for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+                    let newResipe = Resipe()
+                    newResipe.title = resipe
+                    self.realm.add(newResipe)
                 }
             }
             
-            categories = realm.objects(Category) // request all creating categories
+            resipes = realm.objects(Resipe.self) // request all creating categories
         }
     }
 
@@ -49,30 +48,30 @@ class MyTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        print(categories.count)
+        print(resipes.count)
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return categories.count
+        return resipes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? ResipeTableViewCell {
-            let category = categories[indexPath.row]
-            cell.configureCell(resipe: category)
+            let resipe = resipes[indexPath.row]
+            cell.configureCell(resipe: resipe)
             
             return cell
         }else{
-                return ResipeTableViewCell()
+            return ResipeTableViewCell()
         }
         
         
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        selectedCategory = categories[indexPath.row]
+        selectedResipe = resipes[indexPath.row]
         return indexPath
     }
 

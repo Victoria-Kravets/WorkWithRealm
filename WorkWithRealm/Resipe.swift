@@ -9,6 +9,6 @@
 import Foundation
 import RealmSwift
 
-class Category : Object {
-    dynamic var name = ""
+class Resipe : Object {
+    dynamic var title = ""
 }
