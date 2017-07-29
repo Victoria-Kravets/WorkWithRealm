@@ -42,6 +42,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 newResipe.ingredience = resipeIngredients.text!
                 newResipe.steps = resipeIngredients.text!
                 newResipe.date = NSDate() as Date!
+                print(newResipe.date)
                 newResipe.setRecipeImage(resipeImage.image!)
                 self.realm.add(newResipe)
             }

@@ -49,6 +49,7 @@ class MyTableViewController: UITableViewController {
                     }
                     
                     newResipe.date = Date()
+                    print(newResipe.date)
                     self.realm.add(newResipe)
                 }
             }

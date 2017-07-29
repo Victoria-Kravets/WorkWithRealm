@@ -16,8 +16,11 @@ class ResipeTableViewCell: UITableViewCell {
    
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
-        dateLbl.text = String(describing: resipe.date)
-        print(resipe.title)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = formatter.string(from: resipe.date!)
+        print(date)
+        dateLbl.text = date
         resipeImage.image = resipe.getRecipeImg()
     }
 
