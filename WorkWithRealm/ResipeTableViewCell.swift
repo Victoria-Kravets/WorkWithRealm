@@ -16,7 +16,7 @@ class ResipeTableViewCell: UITableViewCell {
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
         print(resipe.title)
-       // recipeImage.image = recipe.getRecipeImg()
+       //resipeImage.image = resipe.getRecipeImg()
     }
 
 }

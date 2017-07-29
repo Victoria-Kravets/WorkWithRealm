@@ -21,10 +21,11 @@ class MyTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
+        populateDefaultResipes()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        populateDefaultResipes()
+        
     }
     
     func populateDefaultResipes() {

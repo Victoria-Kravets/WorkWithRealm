@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
     var c = ""
     override func viewWillAppear(_ animated: Bool) {
         print(recipe)
-        self.navigationController?.title = "gujgh"
+        //self.navigationController?.title = "gujgh"
         titleLbl.text = recipe.title
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
@@ -29,9 +29,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        navigationController?.title = a //recipe.title
-//        ingredientsLbl.text = b //recipe.ingredience
-//        stepsLbl.text = c //recipe.steps
+
     }
     func fillUI(recipe: Resipe){
       //  print(recipe.title)

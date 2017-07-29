@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-class CreatingResipeViewController: UIViewController {
+class CreatingResipeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let realm = try! Realm()
     
@@ -16,17 +16,19 @@ class CreatingResipeViewController: UIViewController {
     @IBOutlet weak var resipeIngredients: UITextField!
     @IBOutlet weak var resipeSteps: UITextField!
     @IBOutlet weak var resipeImage: UIImageView!
+    var imagePicker = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(_ animated: Bool) {
+        
     }
+   
     @IBAction func addImage(_ sender: UIButton) {
+        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+        
     }
     @IBAction func createResipeButtonPressed(_ sender: UIButton) {
         let title = resipeTitle.text!
@@ -39,6 +41,7 @@ class CreatingResipeViewController: UIViewController {
                 newResipe.title = resipeTitle.text!
                 newResipe.ingredience = resipeIngredients.text!
                 newResipe.steps = resipeIngredients.text!
+                //newResipe.setRecipeImage(resipeImage.image!)
                 self.realm.add(newResipe)
             }
             if realm.refresh(){
@@ -55,7 +58,10 @@ class CreatingResipeViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default))
         self.present(alert, animated: true, completion: nil)
     }
-
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        resipeImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
