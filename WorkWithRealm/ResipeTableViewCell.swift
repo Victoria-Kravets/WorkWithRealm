@@ -18,7 +18,7 @@ class ResipeTableViewCell: UITableViewCell {
         resipeTitle.text = resipe.title
         dateLbl.text = String(describing: resipe.date)
         print(resipe.title)
-      //  resipeImage.image = resipe.image
+        resipeImage.image = resipe.getRecipeImg()
     }
 
 }

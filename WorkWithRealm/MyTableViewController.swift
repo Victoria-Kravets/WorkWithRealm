@@ -35,15 +35,20 @@ class MyTableViewController: UITableViewController {
             
             try! realm.write() { // adding records to database
                 
-                let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpec"], ["Pizza", "1", "1", "pizza.jpec"], ["Gamburger", "1", "1", "gamburger.jpec"], ["Spagetti", "1", "1", "spagetti.jpec"], ["Sushi", "1", "1", "sushi.jpec"]] // creating default names of categories
+                let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg"], ["Pizza", "1", "1", "pizza.jpeg"], ["Gamburger", "1", "1", "gamburger.jpg"], ["Spagetti", "1", "1", "spagetti.jpeg"], ["Sushi", "1", "1", "sushi.jpeg"]] // creating default names of categories
                 
                 for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
                     let newResipe = Resipe()
                     newResipe.title = resipe[0]
                     newResipe.ingredience = resipe[1]
                     newResipe.steps = resipe[2]
-                    //newResipe.image = UIImage(named: resipe[3])!
-                   newResipe.date = Date()
+                    print(resipe[3])
+                    let data = NSData(contentsOfFile: resipe[3])
+                    if data != nil{
+                        newResipe.image = data as! NSData
+                    }
+                    
+                    newResipe.date = Date()
                     self.realm.add(newResipe)
                 }
             }
