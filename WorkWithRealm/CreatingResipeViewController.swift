@@ -41,12 +41,11 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 newResipe.title = resipeTitle.text!
                 newResipe.ingredience = resipeIngredients.text!
                 newResipe.steps = resipeIngredients.text!
-                //newResipe.setRecipeImage(resipeImage.image!)
+                newResipe.date = NSDate() as Date!
+              //  newResipe.image = (resipeImage.image!)
                 self.realm.add(newResipe)
             }
-            if realm.refresh(){
-                print("true")
-            }
+           
             self.navigationController?.popViewController(animated: true)
         }
         if title == "" || ingredients == "" || steps == "" {

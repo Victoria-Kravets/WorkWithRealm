@@ -12,11 +12,13 @@ class ResipeTableViewCell: UITableViewCell {
 
     @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
    
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
+        dateLbl.text = String(describing: resipe.date)
         print(resipe.title)
-       //resipeImage.image = resipe.getRecipeImg()
+      //  resipeImage.image = resipe.image
     }
 
 }

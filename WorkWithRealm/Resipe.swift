@@ -13,7 +13,8 @@ class Resipe : Object {
     dynamic var title = ""
     dynamic var ingredience = ""
     dynamic var steps = ""
-//    dynamic var image = Data()
+    dynamic var date = Date()
+   // dynamic var image = UIImage()
 //    func setRecipeImage(_ img: UIImage) {
 //        let data = UIImagePNGRepresentation(img)
 //        self.image = data!

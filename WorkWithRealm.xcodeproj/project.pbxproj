@@ -21,6 +21,11 @@
 		75B0670E1F2A47A600A7D4E0 /* WorkWithRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0670D1F2A47A600A7D4E0 /* WorkWithRealmTests.swift */; };
 		75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
+		75CD862B1F2C7EA60057F328 /* gamburger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD86291F2C7EA60057F328 /* gamburger.jpg */; };
+		75CD862C1F2C7EA60057F328 /* pizza.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862A1F2C7EA60057F328 /* pizza.jpeg */; };
+		75CD86301F2C7EAB0057F328 /* ChocolateCake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */; };
+		75CD86311F2C7EAB0057F328 /* spagetti.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */; };
+		75CD86321F2C7EAB0057F328 /* sushi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862F1F2C7EAB0057F328 /* sushi.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +57,11 @@
 		75B0670F1F2A47A600A7D4E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B067191F2A4D5600A7D4E0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		75CD86291F2C7EA60057F328 /* gamburger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gamburger.jpg; sourceTree = "<group>"; };
+		75CD862A1F2C7EA60057F328 /* pizza.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpeg; sourceTree = "<group>"; };
+		75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ChocolateCake.jpg; sourceTree = "<group>"; };
+		75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spagetti.jpeg; sourceTree = "<group>"; };
+		75CD862F1F2C7EAB0057F328 /* sushi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sushi.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +106,11 @@
 		75B066F71F2A47A500A7D4E0 /* WorkWithRealm */ = {
 			isa = PBXGroup;
 			children = (
+				75CD86291F2C7EA60057F328 /* gamburger.jpg */,
+				75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */,
+				75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */,
+				75CD862F1F2C7EAB0057F328 /* sushi.jpeg */,
+				75CD862A1F2C7EA60057F328 /* pizza.jpeg */,
 				7523CE8D1F2BA2E9005E41C8 /* 2.jpeg */,
 				75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */,
 				75B066FC1F2A47A500A7D4E0 /* Main.storyboard */,
@@ -216,9 +231,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75CD86301F2C7EAB0057F328 /* ChocolateCake.jpg in Resources */,
 				7523CE8E1F2BA2E9005E41C8 /* 2.jpeg in Resources */,
+				75CD86311F2C7EAB0057F328 /* spagetti.jpeg in Resources */,
 				75B067031F2A47A500A7D4E0 /* LaunchScreen.storyboard in Resources */,
+				75CD862C1F2C7EA60057F328 /* pizza.jpeg in Resources */,
 				75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */,
+				75CD86321F2C7EAB0057F328 /* sushi.jpeg in Resources */,
+				75CD862B1F2C7EA60057F328 /* gamburger.jpg in Resources */,
 				75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
