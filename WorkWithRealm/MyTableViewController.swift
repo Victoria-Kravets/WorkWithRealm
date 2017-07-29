@@ -61,6 +61,15 @@ class MyTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
+    @IBAction func didSelectSort(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0{
+            self.resipes = self.resipes.sorted(byKeyPath: "title")
+        }else{
+           self.resipes = self.resipes.sorted(byKeyPath: "date")
+        }
+        self.tableView.reloadData()
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         print(resipes.count)
         return 1

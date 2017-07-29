@@ -95,6 +95,9 @@
                                 <segment title="A-Z"/>
                                 <segment title="Date"/>
                             </segments>
+                            <connections>
+                                <action selector="didSelectSort:" destination="sA6-Ph-kWr" eventType="valueChanged" id="hST-rB-gnp"/>
+                            </connections>
                         </segmentedControl>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CategoryCell" focusStyle="custom" rowHeight="106" id="f0c-8L-fHH" customClass="ResipeTableViewCell" customModule="WorkWithRealm" customModuleProvider="target">
@@ -144,9 +147,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="segmentedControl" destination="6vO-Vj-OKr" id="wUX-6x-cPd"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZeA-fC-0Yf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
