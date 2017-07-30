@@ -23,6 +23,7 @@ class DetailViewController: UIViewController {
         titleLbl.text = recipe.title
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
+        imageView.image = UIImage(data: recipe.image as! Data)
     }
     override func viewDidLoad() {
         super.viewDidLoad()

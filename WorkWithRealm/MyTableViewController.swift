@@ -42,8 +42,6 @@ class MyTableViewController: UITableViewController {
                     newResipe.title = resipe[0]
                     newResipe.ingredience = resipe[1]
                     newResipe.steps = resipe[2]
-                    print(resipe[3])
-//                   
                     let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
                     let img = UIImage(data: data as Data)
                     newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!)
@@ -56,18 +54,12 @@ class MyTableViewController: UITableViewController {
             resipes = realm.objects(Resipe.self) // request all creating categories
         }
     }
-    /*let defaultResipes = [
-     /*["Chocolate Cake", "1", "1", "ChocolateCake.jpg"],*/
-     ["Pizza", "1", "1", "http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg"]]
-     /*, ["Gamburger", "1", "1", "gamburger.jpg"], ["Spagetti", "1", "1", "spagetti.jpeg"], ["Sushi", "1", "1", "sushi.jpeg"]] // creating default names of categories*/*/
-    
-    // MARK: - Table view data source
     
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
-            self.resipes = self.resipes.sorted(byKeyPath: "title")
+            self.resipes = self.resipes.sorted(byKeyPath: "date")
         }else{
-           self.resipes = self.resipes.sorted(byKeyPath: "date")
+           self.resipes = self.resipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
     }
@@ -97,15 +89,6 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedResipe = resipes[indexPath.row]
         
-        
-        
-//        let viewDetails = DetailViewController() //= self.storyboard?.instantiateViewController(withIdentifier: "View Detail") as! DetailViewController
-//        viewDetails.a = "1"
-//        viewDetails.b = "2"
-//        viewDetails.c = "3"
-//        self.present(viewDetails, animated: true, completion: nil)
-//        viewDetails.fillUI(recipe: selectedResipe)
-        //print(selectedResipe)
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectedResipe = resipes[indexPath.row]
