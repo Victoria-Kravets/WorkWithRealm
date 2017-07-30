@@ -43,11 +43,10 @@ class MyTableViewController: UITableViewController {
                     newResipe.ingredience = resipe[1]
                     newResipe.steps = resipe[2]
                     print(resipe[3])
-                    let data = NSData(contentsOfFile: resipe[3])
-                    if data != nil{
-                        newResipe.image = data as! NSData
-                    }
-                    
+//                   
+                    let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
+                    let img = UIImage(data: data as Data)
+                    newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!)
                     newResipe.date = Date()
                     print(newResipe.date)
                     self.realm.add(newResipe)
@@ -57,7 +56,10 @@ class MyTableViewController: UITableViewController {
             resipes = realm.objects(Resipe.self) // request all creating categories
         }
     }
-    
+    /*let defaultResipes = [
+     /*["Chocolate Cake", "1", "1", "ChocolateCake.jpg"],*/
+     ["Pizza", "1", "1", "http://www.athenaspizzaamherst.com/wp-content/uploads/2013/05/front-1-1008x500.jpg"]]
+     /*, ["Gamburger", "1", "1", "gamburger.jpg"], ["Spagetti", "1", "1", "spagetti.jpeg"], ["Sushi", "1", "1", "sushi.jpeg"]] // creating default names of categories*/*/
     
     // MARK: - Table view data source
     
