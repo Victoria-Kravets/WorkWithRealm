@@ -20,7 +20,7 @@ class ResipeTableViewCell: UITableViewCell {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let date = formatter.string(from: resipe.date!)
-        print(date)
+        
         dateLbl.text = date
         resipeImage.image = resipe.getRecipeImg()
         createrLbl.text = resipe.creater?.userName

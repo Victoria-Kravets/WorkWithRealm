@@ -34,8 +34,7 @@ class DetailViewController: UIViewController {
     func fillUI(recipe: Resipe){
       //  print(recipe.title)
         self.recipe = recipe
-        print(self.recipe)
-        print(recipe)
+        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

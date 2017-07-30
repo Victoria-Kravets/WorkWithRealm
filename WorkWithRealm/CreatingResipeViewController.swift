@@ -39,12 +39,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         if title != "" && ingredients != "" && steps != "" && user != "" {
            
             try! realm.write(){
-                let a = try! Realm().objects(User)
-                let b = try! Realm().objects(Resipe)
-                print(a)
-                print(b)
                 let newResipe = Resipe()
-                
                 let isUserInDB = realm.objects(User.self).filter("userName = '\(user)'").first
                 print(isUserInDB)
                 if isUserInDB != nil {
@@ -52,17 +47,14 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
 
                 }else{
                     newResipe.creater = User(name: user)
-
                 }
-                
-
                 newResipe.title = title
                 newResipe.ingredience = ingredients
                 newResipe.steps = steps
                 newResipe.date = NSDate() as Date!
                 newResipe.setRecipeImage(resipeImage.image!)
                 self.realm.add(newResipe)
-                print(newResipe)
+                
             }
             self.navigationController?.popViewController(animated: true)
         }
