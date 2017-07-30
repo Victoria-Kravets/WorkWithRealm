@@ -13,6 +13,7 @@ class ResipeTableViewCell: UITableViewCell {
     @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var createrLbl: UILabel!
    
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
@@ -22,6 +23,10 @@ class ResipeTableViewCell: UITableViewCell {
         print(date)
         dateLbl.text = date
         resipeImage.image = resipe.getRecipeImg()
+        createrLbl.text = resipe.creater?.userName
+        if let name = resipe.creater?.userName{
+            createrLbl.text = "by: " + name
+        }
     }
 
 }
