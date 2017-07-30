@@ -45,15 +45,15 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 print(b)
                 let newResipe = Resipe()
                 
-//                let isUserInDB = realm.objects(User).filter("userName = '1'").first
-//                print(isUserInDB)
-//                if isUserInDB != nil {
-//                    newResipe.creater = isUserInDB
-//
-//                }else{
-//                    newResipe.creater = User(name: createrOfResipe.text!)
-//
-//                }
+                let isUserInDB = realm.objects(User.self).filter("userName = '\(user)'").first
+                print(isUserInDB)
+                if isUserInDB != nil {
+                    newResipe.creater = isUserInDB
+
+                }else{
+                    newResipe.creater = User(name: user)
+
+                }
                 newResipe.creater = User(name: createrOfResipe.text!)
 
                 newResipe.title = title
