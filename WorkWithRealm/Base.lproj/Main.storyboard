@@ -306,10 +306,18 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gef-fy-spI">
+                                            <rect key="frame" x="240" y="8" width="87" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.83778238296508789" green="0.16188126802444458" blue="0.069879524409770966" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="0.92939352630000005" blue="0.88869791679999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
+                                    <outlet property="countOfResipe" destination="gef-fy-spI" id="dHu-GY-ufR"/>
                                     <outlet property="userNameLbl" destination="s3N-eB-GOv" id="yVR-hf-Vq4"/>
                                 </connections>
                             </tableViewCell>

@@ -32,6 +32,7 @@ class UserTableViewController: UITableViewController {
                 arrayOfChefs.append(user)
             }
         }
+        print(arrayOfChefs)
     }
     
     
@@ -49,6 +50,11 @@ class UserTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserTableViewCell{
             cell.userNameLbl.text = arrayOfChefs[indexPath.row].userName
+            if arrayOfChefs[indexPath.row].countOfResipe == 1{
+                cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipe"
+            }else{
+                cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
+            }
             return cell
         }else{
             return UITableViewCell()

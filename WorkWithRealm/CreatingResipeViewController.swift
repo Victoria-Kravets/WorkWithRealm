@@ -44,6 +44,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 print(isUserInDB)
                 if isUserInDB != nil {
                     newResipe.creater = isUserInDB
+                    isUserInDB?.countOfResipe += 1
                     
                 }else{
                     newResipe.creater = User(name: user)
