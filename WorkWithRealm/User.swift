@@ -9,8 +9,14 @@
 import Foundation
 import RealmSwift
 class User: Object {
-    dynamic var name = ""
+    dynamic var userName = ""
     dynamic var countOfResipe = 0
     var resipe = List<Resipe>()
+    convenience init(name: String){
+        self.init()
+        self.userName = name
+    }
+    
+    
     
 }

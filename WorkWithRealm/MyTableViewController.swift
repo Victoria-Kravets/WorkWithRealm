@@ -35,9 +35,8 @@ class MyTableViewController: UITableViewController {
             
             try! realm.write() { // adding records to database
                 
-                let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg"], ["Pizza", "1", "1", "pizza.jpeg"], ["Gamburger", "1", "1", "gamburger.jpg"], ["Spagetti", "1", "1", "spagetti.jpeg"], ["Sushi", "1", "1", "sushi.jpeg"]] // creating default names of categories
-                
-                for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+                let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Alex Gold"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Nikky Rush"]] // creating default names of categories
+                    for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
                     let newResipe = Resipe()
                     newResipe.title = resipe[0]
                     newResipe.ingredience = resipe[1]
@@ -46,7 +45,7 @@ class MyTableViewController: UITableViewController {
                     let img = UIImage(data: data as Data)
                     newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!)
                     newResipe.date = Date()
-                    print(newResipe.date)
+                    newResipe.creater = User(name: resipe[4])
                     self.realm.add(newResipe)
                 }
             }
@@ -75,7 +74,7 @@ class MyTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath) as? ResipeTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "ResipeCell", for: indexPath) as? ResipeTableViewCell {
             let resipe = resipes[indexPath.row]
             cell.configureCell(resipe: resipe)
             return cell

@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */; };
-		7523CE8E1F2BA2E9005E41C8 /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 7523CE8D1F2BA2E9005E41C8 /* 2.jpeg */; };
 		7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */; };
 		7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */; };
 		753813651F2E0F38009E86F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813641F2E0F38009E86F0 /* User.swift */; };
+		753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813661F2E1147009E86F0 /* UserTableViewController.swift */; };
+		753813691F2E1156009E86F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813681F2E1156009E86F0 /* UserTableViewCell.swift */; };
 		757051C31F2B40380014B9B2 /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C21F2B40380014B9B2 /* MyTableViewController.swift */; };
 		757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C61F2B42B90014B9B2 /* Resipe.swift */; };
-		757051C91F2B42D60014B9B2 /* Specimen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C81F2B42D60014B9B2 /* Specimen.swift */; };
 		75B066F91F2A47A500A7D4E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */; };
 		75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FC1F2A47A500A7D4E0 /* Main.storyboard */; };
 		75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */; };
@@ -22,11 +22,6 @@
 		75B0670E1F2A47A600A7D4E0 /* WorkWithRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0670D1F2A47A600A7D4E0 /* WorkWithRealmTests.swift */; };
 		75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
-		75CD862B1F2C7EA60057F328 /* gamburger.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD86291F2C7EA60057F328 /* gamburger.jpg */; };
-		75CD862C1F2C7EA60057F328 /* pizza.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862A1F2C7EA60057F328 /* pizza.jpeg */; };
-		75CD86301F2C7EAB0057F328 /* ChocolateCake.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */; };
-		75CD86311F2C7EAB0057F328 /* spagetti.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */; };
-		75CD86321F2C7EAB0057F328 /* sushi.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 75CD862F1F2C7EAB0057F328 /* sushi.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,13 +36,13 @@
 
 /* Begin PBXFileReference section */
 		7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResipeTableViewCell.swift; sourceTree = "<group>"; };
-		7523CE8D1F2BA2E9005E41C8 /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
 		7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatingResipeViewController.swift; sourceTree = "<group>"; };
 		7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		753813641F2E0F38009E86F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		753813661F2E1147009E86F0 /* UserTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
+		753813681F2E1156009E86F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewCell.swift; path = ../UserTableViewCell.swift; sourceTree = "<group>"; };
 		757051C21F2B40380014B9B2 /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		757051C61F2B42B90014B9B2 /* Resipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resipe.swift; sourceTree = "<group>"; };
-		757051C81F2B42D60014B9B2 /* Specimen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Specimen.swift; sourceTree = "<group>"; };
 		75B066F51F2A47A500A7D4E0 /* WorkWithRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkWithRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75B066FD1F2A47A500A7D4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,11 +54,6 @@
 		75B0670F1F2A47A600A7D4E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B067191F2A4D5600A7D4E0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
-		75CD86291F2C7EA60057F328 /* gamburger.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = gamburger.jpg; sourceTree = "<group>"; };
-		75CD862A1F2C7EA60057F328 /* pizza.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pizza.jpeg; sourceTree = "<group>"; };
-		75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ChocolateCake.jpg; sourceTree = "<group>"; };
-		75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spagetti.jpeg; sourceTree = "<group>"; };
-		75CD862F1F2C7EAB0057F328 /* sushi.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sushi.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +98,6 @@
 		75B066F71F2A47A500A7D4E0 /* WorkWithRealm */ = {
 			isa = PBXGroup;
 			children = (
-				75CD86291F2C7EA60057F328 /* gamburger.jpg */,
-				75CD862D1F2C7EAB0057F328 /* ChocolateCake.jpg */,
-				75CD862E1F2C7EAB0057F328 /* spagetti.jpeg */,
-				75CD862F1F2C7EAB0057F328 /* sushi.jpeg */,
-				75CD862A1F2C7EA60057F328 /* pizza.jpeg */,
-				7523CE8D1F2BA2E9005E41C8 /* 2.jpeg */,
 				75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */,
 				75B066FC1F2A47A500A7D4E0 /* Main.storyboard */,
 				75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */,
@@ -121,11 +105,12 @@
 				75B067041F2A47A600A7D4E0 /* Info.plist */,
 				757051C21F2B40380014B9B2 /* MyTableViewController.swift */,
 				757051C61F2B42B90014B9B2 /* Resipe.swift */,
-				757051C81F2B42D60014B9B2 /* Specimen.swift */,
 				7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */,
 				7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */,
 				7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */,
 				753813641F2E0F38009E86F0 /* User.swift */,
+				753813681F2E1156009E86F0 /* UserTableViewCell.swift */,
+				753813661F2E1147009E86F0 /* UserTableViewController.swift */,
 			);
 			path = WorkWithRealm;
 			sourceTree = "<group>";
@@ -234,14 +219,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75CD86301F2C7EAB0057F328 /* ChocolateCake.jpg in Resources */,
-				7523CE8E1F2BA2E9005E41C8 /* 2.jpeg in Resources */,
-				75CD86311F2C7EAB0057F328 /* spagetti.jpeg in Resources */,
 				75B067031F2A47A500A7D4E0 /* LaunchScreen.storyboard in Resources */,
-				75CD862C1F2C7EA60057F328 /* pizza.jpeg in Resources */,
 				75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */,
-				75CD86321F2C7EAB0057F328 /* sushi.jpeg in Resources */,
-				75CD862B1F2C7EA60057F328 /* gamburger.jpg in Resources */,
 				75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,9 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */,
+				753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */,
 				7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */,
 				757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */,
-				757051C91F2B42D60014B9B2 /* Specimen.swift in Sources */,
+				753813691F2E1156009E86F0 /* UserTableViewCell.swift in Sources */,
 				753813651F2E0F38009E86F0 /* User.swift in Sources */,
 				757051C31F2B40380014B9B2 /* MyTableViewController.swift in Sources */,
 				75B066F91F2A47A500A7D4E0 /* AppDelegate.swift in Sources */,

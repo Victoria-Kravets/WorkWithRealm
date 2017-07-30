@@ -12,6 +12,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     
     let realm = try! Realm()
     
+    @IBOutlet weak var createrOfResipe: UITextField!
     @IBOutlet weak var resipeTitle: UITextField!
     @IBOutlet weak var resipeIngredients: UITextField!
     @IBOutlet weak var resipeSteps: UITextField!
@@ -34,13 +35,20 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
-        
+        let userName = createrOfResipe.text!
         if title != "" && ingredients != "" && steps != "" {
             try! realm.write(){
                 let newResipe = Resipe()
-                newResipe.title = resipeTitle.text!
-                newResipe.ingredience = resipeIngredients.text!
-                newResipe.steps = resipeIngredients.text!
+                for user in realm.objects(User){
+                    if user == realm.objects(User){
+                        print("sucess")
+                    }
+                }
+                
+                newResipe.creater = User(name: createrOfResipe.text!)
+                newResipe.title = title
+                newResipe.ingredience = ingredients
+                newResipe.steps = steps
                 newResipe.date = NSDate() as Date!
                 print(newResipe.date)
                 newResipe.setRecipeImage(resipeImage.image!)
