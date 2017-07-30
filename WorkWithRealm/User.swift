@@ -15,6 +15,7 @@ class User: Object {
     convenience init(name: String){
         self.init()
         self.userName = name
+        countOfResipe += 1
     }
     
     

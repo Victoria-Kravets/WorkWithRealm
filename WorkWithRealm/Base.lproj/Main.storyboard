@@ -164,6 +164,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Resipe Book" id="6Bi-Tc-XRM">
+                        <barButtonItem key="leftBarButtonItem" title="Chefs" id="hDK-fb-1Ai">
+                            <connections>
+                                <segue destination="dlh-td-3l4" kind="show" id="0aV-cT-ZQw"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+ NEW" id="Cy5-pB-meB">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="2zk-UU-ouL"/>

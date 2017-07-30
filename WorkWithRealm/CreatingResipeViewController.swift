@@ -35,28 +35,38 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
-        let userName = createrOfResipe.text!
-        if title != "" && ingredients != "" && steps != "" && userName != "" {
+        let user = createrOfResipe.text!
+        if title != "" && ingredients != "" && steps != "" && user != "" {
+           
             try! realm.write(){
+                let a = try! Realm().objects(User)
+                let b = try! Realm().objects(Resipe)
+                print(a)
+                print(b)
                 let newResipe = Resipe()
-                for user in realm.objects(User){
-                    if user == realm.objects(User){
-                        print("sucess")
-                    }
-                }
                 
+//                let isUserInDB = realm.objects(User).filter("userName = '1'").first
+//                print(isUserInDB)
+//                if isUserInDB != nil {
+//                    newResipe.creater = isUserInDB
+//
+//                }else{
+//                    newResipe.creater = User(name: createrOfResipe.text!)
+//
+//                }
                 newResipe.creater = User(name: createrOfResipe.text!)
+
                 newResipe.title = title
                 newResipe.ingredience = ingredients
                 newResipe.steps = steps
                 newResipe.date = NSDate() as Date!
-                print(newResipe.date)
                 newResipe.setRecipeImage(resipeImage.image!)
                 self.realm.add(newResipe)
+                print(newResipe)
             }
             self.navigationController?.popViewController(animated: true)
         }
-        if title == "" || ingredients == "" || steps == "" || userName == "" {
+        if title == "" || ingredients == "" || steps == "" || user == "" {
             createAlert(title: "Warning", massage: "Please fill all textFields!")
         }
     }
