@@ -36,7 +36,7 @@ class MyTableViewController: UITableViewController {
             try! realm.write() { // adding records to database
                 
                 let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Alex Gold"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Nikky Rush"]] // creating default names of categories
-                    for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+                for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
                     let newResipe = Resipe()
                     newResipe.title = resipe[0]
                     newResipe.ingredience = resipe[1]
@@ -58,7 +58,7 @@ class MyTableViewController: UITableViewController {
         if sender.selectedSegmentIndex == 0{
             self.resipes = self.resipes.sorted(byKeyPath: "date")
         }else{
-           self.resipes = self.resipes.sorted(byKeyPath: "title")
+            self.resipes = self.resipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
     }
@@ -128,14 +128,14 @@ class MyTableViewController: UITableViewController {
      }
      */
     
- 
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC"{
             var ditailController = segue.destination as! DetailViewController
             // your new view controller should have property that will store passed value
             ditailController.recipe = selectedResipe
         }
-     }
- 
+    }
+    
     
 }

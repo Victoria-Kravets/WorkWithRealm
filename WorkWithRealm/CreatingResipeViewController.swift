@@ -25,7 +25,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     override func viewWillAppear(_ animated: Bool) {
         
     }
-   
+    
     @IBAction func addImage(_ sender: UIButton) {
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
         present(imagePicker, animated: true, completion: nil)
@@ -37,14 +37,14 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let steps = resipeSteps.text!
         let user = createrOfResipe.text!
         if title != "" && ingredients != "" && steps != "" && user != "" {
-           
+            
             try! realm.write(){
                 let newResipe = Resipe()
                 let isUserInDB = realm.objects(User.self).filter("userName = '\(user)'").first
                 print(isUserInDB)
                 if isUserInDB != nil {
                     newResipe.creater = isUserInDB
-
+                    
                 }else{
                     newResipe.creater = User(name: user)
                 }
@@ -72,13 +72,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         self.dismiss(animated: true, completion: nil)
     }
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

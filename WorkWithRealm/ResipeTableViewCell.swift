@@ -9,12 +9,12 @@
 import UIKit
 
 class ResipeTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var createrLbl: UILabel!
-   
+    
     func configureCell(resipe: Resipe){
         resipeTitle.text = resipe.title
         let formatter = DateFormatter()
@@ -28,5 +28,5 @@ class ResipeTableViewCell: UITableViewCell {
             createrLbl.text = "by: " + name
         }
     }
-
+    
 }
