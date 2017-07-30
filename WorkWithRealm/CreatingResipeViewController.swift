@@ -54,7 +54,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                     newResipe.creater = User(name: user)
 
                 }
-                newResipe.creater = User(name: createrOfResipe.text!)
+                
 
                 newResipe.title = title
                 newResipe.ingredience = ingredients

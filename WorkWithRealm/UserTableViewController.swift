@@ -14,17 +14,31 @@ class UserTableViewController: UITableViewController {
     lazy var users: Results<User> = {self.realm.objects(User.self)}()
     override func viewDidLoad() {
         super.viewDidLoad()
-        try! realm.write() { // adding records to database
+        var arrayOfChefs = [User]()
+        var arr = [User()]
+        var count = 0
+        let userr = realm.objects(User)
+        for user in userr{
             
-//            let defaultUsers = ["Robert Smith", "Tom Ford", "Karolina Gas"]
-//            
-//            for user in defaultUsers {
-//                let newUser = User(name: <#String#>)
-//                newUser.userName = defaultUsers[0]
-//                
-//                self.realm.add(newUser)
-//            }
+            if arrayOfChefs.count != 0{
+                
+                for chef in arrayOfChefs{
+                    
+                    if chef.userName == user.userName{
+                        arrayOfChefs.remove(at: arrayOfChefs.index(of: chef)!)
+                        count -= 1
+                        
+                    }
+                    
+                }
+                arrayOfChefs.append(user)
+                count += 1
+            }else{
+                arrayOfChefs.append(user)
+                
+            }
         }
+        print(arrayOfChefs)
 
     }
 
