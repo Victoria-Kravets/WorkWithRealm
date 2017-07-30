@@ -283,7 +283,7 @@
             </objects>
             <point key="canvasLocation" x="1784.8" y="778.56071964017997"/>
         </scene>
-        <!--User Table View Controller-->
+        <!--Chifs:-->
         <scene sceneID="Y9r-Dp-DVO">
             <objects>
                 <tableViewController id="42j-LU-mQV" customClass="UserTableViewController" customModule="WorkWithRealm" customModuleProvider="target" sceneMemberID="viewController">
@@ -292,22 +292,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="4tk-uN-ILF" customClass="UserTableViewCell" customModule="WorkWithRealm" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="UserCell" id="4tk-uN-ILF" customClass="UserTableViewCell" customModule="WorkWithRealm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4tk-uN-ILF" id="fOb-jx-jHa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3N-eB-GOv">
-                                            <rect key="frame" x="8" y="0.0" width="359" height="33"/>
+                                            <rect key="frame" x="15" y="0.0" width="352" height="33"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="1" green="0.92939352630000005" blue="0.88869791679999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="userNameLbl" destination="s3N-eB-GOv" id="yVR-hf-Vq4"/>
                                 </connections>
@@ -318,7 +319,7 @@
                             <outlet property="delegate" destination="42j-LU-mQV" id="MGD-Ao-GyG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="fMH-tJ-rCc"/>
+                    <navigationItem key="navigationItem" title="Chifs:" id="fMH-tJ-rCc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FUq-GL-sTf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

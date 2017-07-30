@@ -11,35 +11,27 @@ import RealmSwift
 class UserTableViewController: UITableViewController {
     
     let realm = try! Realm()
-    lazy var users: Results<User> = {self.realm.objects(User.self)}()
+    var arrayOfChefs = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        var arrayOfChefs = [User]()
-        var arr = [User()]
+        
         var count = 0
-        let userr = realm.objects(User)
-        for user in userr{
+        let uses = realm.objects(User.self)
+        for user in uses{
             
             if arrayOfChefs.count != 0{
-                
                 for chef in arrayOfChefs{
-                    
                     if chef.userName == user.userName{
                         arrayOfChefs.remove(at: arrayOfChefs.index(of: chef)!)
                         count -= 1
-                        
                     }
-                    
                 }
                 arrayOfChefs.append(user)
                 count += 1
             }else{
                 arrayOfChefs.append(user)
-                
             }
         }
-        print(arrayOfChefs)
-
     }
 
    
@@ -50,13 +42,13 @@ class UserTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return users.count
+        return arrayOfChefs.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell", for: indexPath) as? UserTableViewCell{
-        cell.userNameLbl.text = users[indexPath.row].userName
+        cell.userNameLbl.text = arrayOfChefs[indexPath.row].userName
             return cell
         }else{
             return UITableViewCell()
