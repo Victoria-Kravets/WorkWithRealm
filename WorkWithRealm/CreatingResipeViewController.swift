@@ -36,7 +36,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        if title != "" && ingredients != "" && steps != "" {
+        if title != "" && ingredients != "" && steps != "" && userName != "" {
             try! realm.write(){
                 let newResipe = Resipe()
                 for user in realm.objects(User){
@@ -56,7 +56,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             }
             self.navigationController?.popViewController(animated: true)
         }
-        if title == "" || ingredients == "" || steps == "" {
+        if title == "" || ingredients == "" || steps == "" || userName == "" {
             createAlert(title: "Warning", massage: "Please fill all textFields!")
         }
     }

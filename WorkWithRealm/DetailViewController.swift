@@ -10,6 +10,8 @@ import UIKit
 import RealmSwift
 class DetailViewController: UIViewController {
 
+   
+    @IBOutlet weak var createrLbl: UILabel!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var ingredientsLbl: UILabel!
@@ -18,9 +20,8 @@ class DetailViewController: UIViewController {
     var recipe = Resipe()
  
     override func viewWillAppear(_ animated: Bool) {
-        print(recipe)
-        //self.navigationController?.title = "gujgh"
         titleLbl.text = recipe.title
+        createrLbl.text = recipe.creater?.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
         imageView.image = UIImage(data: recipe.image as! Data)
