@@ -14,7 +14,7 @@ class UserTableViewController: UITableViewController {
     var arrayOfChefs = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(realm.objects(Resipe.self))
         var count = 0
         let uses = realm.objects(User.self)
         for user in uses{
@@ -35,7 +35,9 @@ class UserTableViewController: UITableViewController {
         print(arrayOfChefs)
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1

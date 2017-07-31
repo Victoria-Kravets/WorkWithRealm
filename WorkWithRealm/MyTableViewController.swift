@@ -106,7 +106,10 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write() {
+                print([indexPath.row])
+                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
                 realm.delete(self.resipes[indexPath.row])
+                realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

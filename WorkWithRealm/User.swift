@@ -17,7 +17,9 @@ class User: Object {
         self.userName = name
         countOfResipe += 1
     }
-    
+//    deinit{
+//        countOfResipe -= 1
+//    }
     
     
 }
