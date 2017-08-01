@@ -103,18 +103,45 @@ class MyTableViewController: UITableViewController {
     
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            try! realm.write() {
+//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            try! realm.write() {
+//                print([indexPath.row])
+//                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
+//                realm.delete(self.resipes[indexPath.row])
+//                realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
+//            }
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//        
+//    }
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (deleteAction, indexPath) -> Void in
+            
+            //Deletion will go here
+            
+            try! self.realm.write() {
                 print([indexPath.row])
-                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
-                realm.delete(self.resipes[indexPath.row])
-                realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
+                let user = self.realm.objects(Resipe.self)[indexPath.row].creater!.userName
+                self.realm.delete(self.resipes[indexPath.row])
+                self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
+                if (self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe) == 0{
+                    self.realm.delete(self.realm.objects(User.self).filter("userName = '\(user)'").first!) 
+                }
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
+
         }
+        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit") { (editAction, indexPath) -> Void in
+            
+//            // Editing will go here
+//            let listToBeUpdated = self.resipes[indexPath.row]
+//            self.displayAlertToAddTaskList(listToBeUpdated)
+            
+        }
+        return [deleteAction, editAction]
     }
-    
+
     
     /*
      // Override to support rearranging the table view.

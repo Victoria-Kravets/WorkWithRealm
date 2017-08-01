@@ -22,6 +22,7 @@
 		75B0670E1F2A47A600A7D4E0 /* WorkWithRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B0670D1F2A47A600A7D4E0 /* WorkWithRealmTests.swift */; };
 		75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
+		75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75B565121F3098C400F0F18F /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		75B0670F1F2A47A600A7D4E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75B067191F2A4D5600A7D4E0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
+		75B565121F3098C400F0F18F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		75B066EC1F2A47A500A7D4E0 = {
 			isa = PBXGroup;
 			children = (
+				75B565121F3098C400F0F18F /* .swiftlint.yml */,
 				75B066F71F2A47A500A7D4E0 /* WorkWithRealm */,
 				75B0670C1F2A47A600A7D4E0 /* WorkWithRealmTests */,
 				75B066F61F2A47A500A7D4E0 /* Products */,
@@ -219,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */,
 				75B067031F2A47A500A7D4E0 /* LaunchScreen.storyboard in Resources */,
 				75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */,
 				75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */,
