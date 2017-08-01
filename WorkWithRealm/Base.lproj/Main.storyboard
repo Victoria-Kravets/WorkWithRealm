@@ -88,7 +88,7 @@
             </objects>
             <point key="canvasLocation" x="2687" y="44"/>
         </scene>
-        <!--Resipe Book-->
+        <!--My Table View Controller-->
         <scene sceneID="DxL-8i-Iup">
             <objects>
                 <tableViewController id="sA6-Ph-kWr" customClass="MyTableViewController" customModule="WorkWithRealm" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,12 +163,21 @@
                             <outlet property="delegate" destination="sA6-Ph-kWr" id="wKc-Wn-xsS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Resipe Book" id="6Bi-Tc-XRM">
+                    <navigationItem key="navigationItem" id="6Bi-Tc-XRM">
+                        <nil key="title"/>
                         <barButtonItem key="leftBarButtonItem" title="Chefs" id="hDK-fb-1Ai">
                             <connections>
                                 <segue destination="42j-LU-mQV" kind="show" id="ELO-06-uF4"/>
                             </connections>
                         </barButtonItem>
+                        <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CqL-8E-vKr">
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="All Recipes"/>
+                            <connections>
+                                <action selector="viewAllRecipes:" destination="sA6-Ph-kWr" eventType="touchUpInside" id="aZk-Jc-Xwa"/>
+                            </connections>
+                        </button>
                         <barButtonItem key="rightBarButtonItem" title="+ NEW" id="Cy5-pB-meB">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="2zk-UU-ouL"/>
@@ -382,6 +391,6 @@
         <image name="2.jpeg" width="300" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a4C-lv-sBv"/>
+        <segue reference="r3v-HW-G68"/>
     </inferredMetricsTieBreakers>
 </document>

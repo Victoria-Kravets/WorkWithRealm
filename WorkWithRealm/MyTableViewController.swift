@@ -20,20 +20,32 @@ class MyTableViewController: UITableViewController {
     //lazy - property, default value didn't calculate before first use
     var selectedResipe = Resipe()
     
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        print(chef)
+        chef = nil
+    }
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         populateDefaultResipes()
         if chef != nil{
             print(chef.userName)
-            resipes = resipes.filter("creater.userName == %@", chef.userName)
+            resipes = self.realm.objects(Resipe.self).filter("creater.userName == %@", chef.userName)
+            
             print("resipes count: ", resipes.count)
             print("___________", resipes)
+        }else{
+            resipes = self.realm.objects(Resipe.self)
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    @IBAction func viewAllRecipes(_ sender: UIButton) {
+        chef = nil
+        resipes = self.realm.objects(Resipe.self)
+        print(resipes)
+        tableView.reloadData()
     }
     
     func populateDefaultResipes() {
