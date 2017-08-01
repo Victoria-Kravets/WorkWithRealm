@@ -26,16 +26,9 @@ class MyTableViewController: UITableViewController {
         populateDefaultResipes()
         if chef != nil{
             print(chef.userName)
-//            let resipesOfOneChef = realm.objects(Resipe.self).filter({(resipe) -> Bool in
-//                return resipe.creater?.userName == self.chef.userName
-//            })
-            let resipesOfOneChef = realm.objects(Resipe.self).filter({(resipe) -> Bool in
-                return resipe.creater?.userName == self.chef.userName
-            })
-            
-//            resipes = resipesOfOneChef
+            resipes = resipes.filter("creater.userName == %@", chef.userName)
             print("resipes count: ", resipes.count)
-            print("___________", resipesOfOneChef)
+            print("___________", resipes)
         }
     }
     override func viewDidLoad() {
