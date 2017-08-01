@@ -14,6 +14,7 @@ class MyTableViewController: UITableViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe.self)}()
+    var chef: User!
     // creating instance Realm, fill categories througvarbjects(_:)
     //try will be throw error
     //lazy - property, default value didn't calculate before first use
@@ -23,6 +24,19 @@ class MyTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         tableView.reloadData()
         populateDefaultResipes()
+        if chef != nil{
+            print(chef.userName)
+//            let resipesOfOneChef = realm.objects(Resipe.self).filter({(resipe) -> Bool in
+//                return resipe.creater?.userName == self.chef.userName
+//            })
+            let resipesOfOneChef = realm.objects(Resipe.self).filter({(resipe) -> Bool in
+                return resipe.creater?.userName == self.chef.userName
+            })
+            
+//            resipes = resipesOfOneChef
+            print("resipes count: ", resipes.count)
+            print("___________", resipesOfOneChef)
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +64,11 @@ class MyTableViewController: UITableViewController {
                 }
             }
             
-            resipes = realm.objects(Resipe.self) // request all creating categories
+            resipes = realm.objects(Resipe.self) // request all creating resipes
         }
+       
     }
-    
+   
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             self.resipes = self.resipes.sorted(byKeyPath: "date")
@@ -101,47 +116,18 @@ class MyTableViewController: UITableViewController {
     }
     
     
-    
-    // Override to support editing the table view.
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            try! realm.write() {
-//                print([indexPath.row])
-//                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
-//                realm.delete(self.resipes[indexPath.row])
-//                realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
-//            }
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//        
-//    }
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .default, title: "Delete") { (deleteAction, indexPath) -> Void in
-            
-            //Deletion will go here
-            
-            try! self.realm.write() {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            try! realm.write() {
                 print([indexPath.row])
-                let user = self.realm.objects(Resipe.self)[indexPath.row].creater!.userName
-                self.realm.delete(self.resipes[indexPath.row])
-                self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
-                if (self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe) == 0{
-                    self.realm.delete(self.realm.objects(User.self).filter("userName = '\(user)'").first!) 
-                }
+                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
+                realm.delete(self.resipes[indexPath.row])
+                realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
-
         }
-        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit") { (editAction, indexPath) -> Void in
-            
-//            // Editing will go here
-//            let listToBeUpdated = self.resipes[indexPath.row]
-//            self.displayAlertToAddTaskList(listToBeUpdated)
-            
-        }
-        return [deleteAction, editAction]
+        
     }
-
     
     /*
      // Override to support rearranging the table view.
@@ -163,6 +149,7 @@ class MyTableViewController: UITableViewController {
         if segue.identifier == "goToDetailVC"{
             var ditailController = segue.destination as! DetailViewController
             // your new view controller should have property that will store passed value
+            print(selectedResipe)
             ditailController.recipe = selectedResipe
         }
     }

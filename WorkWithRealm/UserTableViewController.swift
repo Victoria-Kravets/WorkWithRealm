@@ -11,7 +11,9 @@ import RealmSwift
 class UserTableViewController: UITableViewController {
     
     let realm = try! Realm()
+    var user: User!
     var arrayOfChefs = [User]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(realm.objects(Resipe.self))
@@ -57,13 +59,22 @@ class UserTableViewController: UITableViewController {
             }else{
                 cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
             }
+            
             return cell
         }else{
             return UITableViewCell()
         }
         
     }
-    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        user = realm.objects(Resipe.self)[indexPath.row].creater!
+        
+
+        return indexPath
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
+    }
     
     /*
      // Override to support conditional editing of the table view.
@@ -100,14 +111,17 @@ class UserTableViewController: UITableViewController {
      }
      */
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
+    
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "See recipes of selected chef"{
+            var tableResipesOfOneChef = segue.destination as! MyTableViewController
+            print(user)
+           tableResipesOfOneChef.chef = user
+        }
+    
+        
      }
-     */
+    
     
 }

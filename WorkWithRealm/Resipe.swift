@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import UIKit
 class Resipe : Object {
+    
     dynamic var title = ""
     dynamic var ingredience = ""
     dynamic var steps = ""

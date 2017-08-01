@@ -196,13 +196,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingregients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWL-eP-WQF">
-                                        <rect key="frame" x="112" y="501" width="209" height="27"/>
+                                        <rect key="frame" x="112" y="500" width="209" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ingregients:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iCd-ow-2zx">
-                                        <rect key="frame" x="17" y="504" width="87" height="21"/>
+                                        <rect key="frame" x="17" y="503" width="87" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="lj8-87-wmm"/>
                                         </constraints>
@@ -217,7 +217,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mnC-3z-Zfc">
-                                        <rect key="frame" x="54" y="206" width="267" height="256"/>
+                                        <rect key="frame" x="54" y="206" width="267" height="255"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Creater:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="grT-SY-3Qa">
                                         <rect key="frame" x="17" y="162" width="125" height="21"/>
@@ -238,13 +238,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steps" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="100" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lFe-iY-9H5">
-                                        <rect key="frame" x="112" y="543" width="235" height="27"/>
+                                        <rect key="frame" x="112" y="542" width="235" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Steps:" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4E-1F-4y9">
-                                        <rect key="frame" x="34" y="546" width="70" height="21"/>
+                                        <rect key="frame" x="34" y="545" width="70" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="70" id="3dX-X8-h5f"/>
                                             <constraint firstAttribute="height" constant="21" id="Di1-jh-Nfu"/>
@@ -320,7 +320,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4tk-uN-ILF" id="fOb-jx-jHa">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3N-eB-GOv">
@@ -343,6 +343,7 @@
                                 <connections>
                                     <outlet property="countOfResipe" destination="gef-fy-spI" id="dHu-GY-ufR"/>
                                     <outlet property="userNameLbl" destination="s3N-eB-GOv" id="yVR-hf-Vq4"/>
+                                    <segue destination="sA6-Ph-kWr" kind="show" identifier="See recipes of selected chef" id="a4C-lv-sBv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -380,4 +381,7 @@
     <resources>
         <image name="2.jpeg" width="300" height="168"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="a4C-lv-sBv"/>
+    </inferredMetricsTieBreakers>
 </document>
