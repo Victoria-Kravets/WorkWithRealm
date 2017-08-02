@@ -20,36 +20,14 @@ class DetailViewController: UIViewController {
     var recipe = Resipe()
     
     override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(true)
         titleLbl.text = recipe.title
         createrLbl.text = recipe.creater?.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
         imageView.image = UIImage(data: recipe.image as! Data)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        
-    }
-    func fillUI(recipe: Resipe){
-        //  print(recipe.title)
-        self.recipe = recipe
-        
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+       
     
 }

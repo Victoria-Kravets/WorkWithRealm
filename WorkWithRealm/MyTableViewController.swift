@@ -25,22 +25,18 @@ class MyTableViewController: UITableViewController {
         chef = nil
     }
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         tableView.reloadData()
         populateDefaultResipes()
         if chef != nil{
             print(chef.userName)
             resipes = self.realm.objects(Resipe.self).filter("creater.userName == %@", chef.userName)
             
-            print("resipes count: ", resipes.count)
-            print("___________", resipes)
         }else{
             resipes = self.realm.objects(Resipe.self)
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+    
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
         resipes = self.realm.objects(Resipe.self)

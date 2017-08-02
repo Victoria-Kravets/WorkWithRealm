@@ -22,9 +22,6 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         super.viewDidLoad()
         imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-    }
     
     @IBAction func addImage(_ sender: UIButton) {
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
@@ -80,14 +77,4 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         resipeImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
