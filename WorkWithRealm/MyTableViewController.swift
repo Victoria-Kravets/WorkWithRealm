@@ -34,10 +34,10 @@ class MyTableViewController: UITableViewController {
         populateDefaultResipes()
         if chef != nil{
             print(chef.userName)
-            resipes = self.query.doQueryToRealm(objectsInBd: resipes).filter("creater.userName == %@", chef.userName)
+            resipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
             
         }else{
-            resipes = self.query.doQueryToRealm(objectsInBd: resipes)
+            resipes = self.query.doQueryToRecipeInRealm()
         }
         
         tableView.reloadData()
@@ -45,7 +45,7 @@ class MyTableViewController: UITableViewController {
     
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
-        resipes = self.query.doQueryToRealm(objectsInBd: resipes)
+        resipes = self.query.doQueryToRecipeInRealm()
         print(resipes)
         tableView.reloadData()
     }
@@ -71,7 +71,7 @@ class MyTableViewController: UITableViewController {
                 }
             }
             
-            resipes = query.doQueryToRealm(objectsInBd: resipes)
+            resipes = query.doQueryToRecipeInRealm()
         }
        
     }
@@ -125,7 +125,7 @@ class MyTableViewController: UITableViewController {
                 let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
                 self.realm.delete(self.resipes[indexPath.row])
                 self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
-                print(self.query.doQueryToRealm(objectsInBd: users))
+                print(self.query.doQueryToUserInRealm())
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
