@@ -15,25 +15,23 @@ class MyTableViewController: UITableViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe.self)}()
     lazy var users: Results<User> = {self.realm.objects(User.self)}()
-//    var resipes: Results<Resipe>!{
-//        didSet{
-//            resipes = realm.objects(Resipe.self)
-//        }
-//    }
+    //    var resipes: Results<Resipe>!{
+    //        didSet{
+    //            resipes = realm.objects(Resipe.self)
+    //        }
+    //    }
     var chef: User!
     var selectedResipe = Resipe()
     let query = QueryToRealm()
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        print(chef)
         chef = nil
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         populateDefaultResipes()
         if chef != nil{
-            print(chef.userName)
             resipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
             
         }else{
@@ -46,36 +44,39 @@ class MyTableViewController: UITableViewController {
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
         resipes = self.query.doQueryToRecipeInRealm()
-        print(resipes)
         tableView.reloadData()
     }
     
     func populateDefaultResipes() {
-        print(resipes.count)
-        if resipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
         
+        if resipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
+            
             try! realm.write() { // adding records to database
                 
                 let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
                 for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+                    let user = User()
                     let newResipe = Resipe()
                     newResipe.title = resipe[0]
                     newResipe.ingredience = resipe[1]
                     newResipe.steps = resipe[2]
                     let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
                     let img = UIImage(data: data as Data)
-                    newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!)
+                    newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                     newResipe.date = Date()
-                    newResipe.creater = User(name: resipe[4])
+                    user.userName = resipe[4]
+                    newResipe.creater = user
                     self.realm.add(newResipe)
+                    user.resipe.append(newResipe)
+                    
                 }
             }
             
             resipes = query.doQueryToRecipeInRealm()
         }
-       
+        
     }
-   
+    
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             self.resipes = self.resipes.sorted(byKeyPath: "date")
@@ -109,7 +110,6 @@ class MyTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         selectedResipe = resipes[indexPath.row]
-        print(resipes[indexPath.row].title)
         return indexPath
     }
     
@@ -121,11 +121,8 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write() {
-                print([indexPath.row])
-                let user = realm.objects(Resipe.self)[indexPath.row].creater!.userName
+                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
                 self.realm.delete(self.resipes[indexPath.row])
-                self.realm.objects(User.self).filter("userName = '\(user)'").first?.countOfResipe -= 1
-                print(self.query.doQueryToUserInRealm())
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

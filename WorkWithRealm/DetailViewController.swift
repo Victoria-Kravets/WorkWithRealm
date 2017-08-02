@@ -20,7 +20,7 @@ class DetailViewController: UIViewController {
     var recipe = Resipe()
     
     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(true)
+        super.viewWillAppear(true)
         titleLbl.text = recipe.title
         createrLbl.text = recipe.creater?.userName
         ingredientsLbl.text = recipe.ingredience
@@ -28,6 +28,6 @@ class DetailViewController: UIViewController {
         imageView.image = UIImage(data: recipe.image as! Data)
     }
     
-       
+    
     
 }

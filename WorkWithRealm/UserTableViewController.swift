@@ -12,13 +12,13 @@ class UserTableViewController: UITableViewController {
     
     let realm = try! Realm()
     var user: User!
+    let query = QueryToRealm()
     var arrayOfChefs = [User]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(realm.objects(Resipe.self))
         var count = 0
-        let uses = realm.objects(User.self)
+        let uses = self.query.doQueryToUserInRealm()
         for user in uses{
             
             if arrayOfChefs.count != 0{
@@ -34,7 +34,6 @@ class UserTableViewController: UITableViewController {
                 arrayOfChefs.append(user)
             }
         }
-        print(arrayOfChefs)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,17 +65,14 @@ class UserTableViewController: UITableViewController {
         
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        user = realm.objects(Resipe.self)[indexPath.row].creater!
-        
-        
+        user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!
         return indexPath
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "See recipes of selected chef"{
-            var tableResipesOfOneChef = segue.destination as! MyTableViewController
-            print(user)
+            let tableResipesOfOneChef = segue.destination as! MyTableViewController
             tableResipesOfOneChef.chef = user
         }
         

@@ -37,14 +37,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let user = createrOfResipe.text!
         if title != "" && ingredients != "" && steps != "" && user != "" {
             let newResipe = Resipe()
-//            var isUserInDB = self.realm.objects(User.self).filter("userName = '\(user)'").first /////
             var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first
             try! realm.write(){
-                print(isUserInDB)
                 if isUserInDB != nil {
                     newResipe.creater = isUserInDB
-                    isUserInDB?.countOfResipe += 1
-                    
                 }else{
                     isUserInDB = User(name: user)
                     newResipe.creater = isUserInDB
@@ -58,10 +54,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 
             }
             try!realm.write {
-                print(newResipe)
                 if isUserInDB != nil{
                     isUserInDB?.resipe.append(newResipe)
-                    print(isUserInDB)
                 }
                 
             }

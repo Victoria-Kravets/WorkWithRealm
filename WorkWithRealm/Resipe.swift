@@ -15,11 +15,11 @@ class Resipe : Object {
     dynamic var ingredience = ""
     dynamic var steps = ""
     dynamic var date : Date!
-    dynamic var image : NSData?
+    dynamic var image : Data?
     dynamic var creater: User?
     func setRecipeImage(_ img: UIImage) {
         let data = UIImagePNGRepresentation(img)
-        self.image = data! as NSData
+        self.image = data
     }
     func getRecipeImg() -> UIImage? {
         if self.image != nil{

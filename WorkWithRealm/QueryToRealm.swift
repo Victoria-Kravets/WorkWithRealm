@@ -22,8 +22,3 @@ class QueryToRealm{
     }
 }
 
-//let realm = try! Realm()
-//
-//var objects = objectsInBd
-//objects = realm.objects(T.self)
-//return objects

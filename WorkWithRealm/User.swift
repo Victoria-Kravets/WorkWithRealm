@@ -10,12 +10,15 @@ import Foundation
 import RealmSwift
 class User: Object {
     dynamic var userName = ""
-    dynamic var countOfResipe = 0
+    var count = 0
     var resipe = List<Resipe>()
+    dynamic var countOfResipe : Int{
+        count = resipe.count
+        return count
+    }
     convenience init(name: String){
         self.init()
         self.userName = name
-        countOfResipe += 1
     }
     
 }
