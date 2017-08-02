@@ -20,13 +20,14 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     var imagePicker = UIImagePickerController()
     override func viewDidLoad() {
         super.viewDidLoad()
-        imagePicker.delegate = self as? UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        configurePicker()
     }
-    
-    @IBAction func addImage(_ sender: UIButton) {
+    func configurePicker(){
+        imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+    }
+    @IBAction func addImage(_ sender: UIButton) {
         present(imagePicker, animated: true, completion: nil)
-        
     }
     @IBAction func createResipeButtonPressed(_ sender: UIButton) {
         let title = resipeTitle.text!
