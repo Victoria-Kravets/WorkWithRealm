@@ -23,6 +23,7 @@
 		75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
 		75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
 		75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75B565121F3098C400F0F18F /* .swiftlint.yml */; };
+		75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +57,7 @@
 		75B067191F2A4D5600A7D4E0 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Carthage/Build/iOS/Realm.framework; sourceTree = "<group>"; };
 		75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Carthage/Build/iOS/RealmSwift.framework; sourceTree = "<group>"; };
 		75B565121F3098C400F0F18F /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .swiftlint.yml; sourceTree = "<group>"; };
+		75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryToRealm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				753813641F2E0F38009E86F0 /* User.swift */,
 				753813681F2E1156009E86F0 /* UserTableViewCell.swift */,
 				753813661F2E1147009E86F0 /* UserTableViewController.swift */,
+				75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */,
 			);
 			path = WorkWithRealm;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7523CE8C1F2B9C2C005E41C8 /* ResipeTableViewCell.swift in Sources */,
+				75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */,
 				753813671F2E1147009E86F0 /* UserTableViewController.swift in Sources */,
 				7523CE901F2BA3F7005E41C8 /* CreatingResipeViewController.swift in Sources */,
 				757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */,

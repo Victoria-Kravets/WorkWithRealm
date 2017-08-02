@@ -11,6 +11,7 @@ import RealmSwift
 class CreatingResipeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let realm = try! Realm()
+    let query = QueryToRealm()
     
     @IBOutlet weak var createrOfResipe: UITextField!
     @IBOutlet weak var resipeTitle: UITextField!
@@ -36,7 +37,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let user = createrOfResipe.text!
         if title != "" && ingredients != "" && steps != "" && user != "" {
             let newResipe = Resipe()
-            var isUserInDB = realm.objects(User.self).filter("userName = '\(user)'").first
+            var isUserInDB = self.realm.objects(User.self).filter("userName = '\(user)'").first /////
             try! realm.write(){
                 print(isUserInDB)
                 if isUserInDB != nil {
