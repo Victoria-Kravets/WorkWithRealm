@@ -122,7 +122,11 @@ class MyTableViewController: UITableViewController {
         if editingStyle == .delete {
             try! realm.write() {
                 let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
+                let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
                 self.realm.delete(self.resipes[indexPath.row])
+                if self.query.doQueryToUserInRealm().filter("userName = '\(recipeName)'").first?.resipe.count == 0 {
+                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
+                }
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

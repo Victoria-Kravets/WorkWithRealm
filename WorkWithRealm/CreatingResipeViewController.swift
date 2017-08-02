@@ -35,34 +35,46 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let user = createrOfResipe.text!
+        
         if title != "" && ingredients != "" && steps != "" && user != "" {
             let newResipe = Resipe()
-            var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first
-            try! realm.write(){
-                if isUserInDB != nil {
-                    newResipe.creater = isUserInDB
-                }else{
-                    isUserInDB = User(name: user)
-                    newResipe.creater = isUserInDB
-                }
-                newResipe.title = title
-                newResipe.ingredience = ingredients
-                newResipe.steps = steps
-                newResipe.date = NSDate() as Date!
-                newResipe.setRecipeImage(resipeImage.image!)
-                self.realm.add(newResipe)
-                
-            }
-            try!realm.write {
-                if isUserInDB != nil{
-                    isUserInDB?.resipe.append(newResipe)
-                }
-                
-            }
+            
+            let user = addRecipeToRealm(newResipe: newResipe)
+            addRecipeToUser(newResipe: newResipe, isUserInDB: user)
+            
             self.navigationController?.popViewController(animated: true)
         }
+        
         if title == "" || ingredients == "" || steps == "" || user == "" {
             createAlert(title: "Warning", massage: "Please fill all textFields!")
+        }
+    }
+    func addRecipeToRealm(newResipe: Resipe) -> User {
+        let title = resipeTitle.text!
+        let ingredients = resipeIngredients.text!
+        let steps = resipeSteps.text!
+        let userName = createrOfResipe.text!
+        var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
+        
+        try! realm.write(){
+            if isUserInDB != nil {
+                newResipe.creater = isUserInDB
+            }else{
+                isUserInDB = User(name: userName)
+                newResipe.creater = isUserInDB
+            }
+            newResipe.title = title
+            newResipe.ingredience = ingredients
+            newResipe.steps = steps
+            newResipe.date = NSDate() as Date!
+            newResipe.setRecipeImage(resipeImage.image!)
+            self.realm.add(newResipe)
+        }
+        return isUserInDB!
+    }
+    func addRecipeToUser(newResipe: Resipe, isUserInDB: User){
+        try!realm.write {
+            isUserInDB.resipe.append(newResipe)
         }
     }
     func createAlert(title: String, massage: String){

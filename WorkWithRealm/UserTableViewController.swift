@@ -54,14 +54,12 @@ class UserTableViewController: UITableViewController {
             cell.userNameLbl.text = arrayOfChefs[indexPath.row].userName
             if arrayOfChefs[indexPath.row].countOfResipe == 1{
                 cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipe"
-            }else{
+            }else if arrayOfChefs[indexPath.row].countOfResipe >= 1{
                 cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
             }
-            
             return cell
-        }else{
-            return UITableViewCell()
         }
+        return UITableViewCell()
         
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
