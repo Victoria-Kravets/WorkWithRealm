@@ -13,13 +13,26 @@ class MyTableViewController: UITableViewController {
     let realm = try! Realm()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    lazy var resipes: Results<Resipe> = {self.realm.objects(Resipe.self)}()
-    lazy var users: Results<User> = {self.realm.objects(User.self)}()
-    //    var resipes: Results<Resipe>!{
-    //        didSet{
-    //            resipes = realm.objects(Resipe.self)
-    //        }
-    //    }
+    var resipes: Results<Resipe>!
+    var recipes: Results<Resipe>{
+        get{
+            resipes = realm.objects(Resipe.self)
+            return resipes
+        }
+        set{
+            resipes = newValue
+        }
+    }
+    var users: Results<User>!
+    var user: Results<User>{
+        get{
+            users = realm.objects(User.self)
+            return users
+        }
+        set{
+            users = newValue
+        }
+    }
     var chef: User!
     var selectedResipe = Resipe()
     let query = QueryToRealm()
@@ -31,11 +44,12 @@ class MyTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         populateDefaultResipes()
+        print(recipes)
         if chef != nil{
-            resipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
+            recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
             
         }else{
-            resipes = self.query.doQueryToRecipeInRealm()
+            recipes = self.query.doQueryToRecipeInRealm()
         }
         
         tableView.reloadData()
@@ -43,13 +57,13 @@ class MyTableViewController: UITableViewController {
     
     @IBAction func viewAllRecipes(_ sender: UIButton) {
         chef = nil
-        resipes = self.query.doQueryToRecipeInRealm()
+        recipes = self.query.doQueryToRecipeInRealm()
         tableView.reloadData()
     }
     
     func populateDefaultResipes() {
         
-        if resipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
+        if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
             
             try! realm.write() { // adding records to database
                 
@@ -72,16 +86,16 @@ class MyTableViewController: UITableViewController {
                 }
             }
             
-            resipes = query.doQueryToRecipeInRealm()
+            recipes = query.doQueryToRecipeInRealm()
         }
         
     }
     
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
-            self.resipes = self.resipes.sorted(byKeyPath: "date")
+            self.recipes = self.recipes.sorted(byKeyPath: "date")
         }else{
-            self.resipes = self.resipes.sorted(byKeyPath: "title")
+            self.recipes = self.recipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
     }
@@ -91,7 +105,7 @@ class MyTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return resipes.count
+        return recipes.count
     }
     
     
@@ -123,7 +137,7 @@ class MyTableViewController: UITableViewController {
             try! realm.write() {
                 let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
                 let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
-                self.realm.delete(self.resipes[indexPath.row])
+                self.realm.delete(self.recipes[indexPath.row])
                 if self.query.doQueryToUserInRealm().filter("userName = '\(recipeName)'").first?.resipe.count == 0 {
                     self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
                 }
