@@ -1,1 +1,2 @@
+github "mxcl/PromiseKit" "4.3.1"
 github "realm/realm-cocoa" "v2.9.1"
