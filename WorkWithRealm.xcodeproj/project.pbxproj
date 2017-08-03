@@ -15,6 +15,9 @@
 		753813691F2E1156009E86F0 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753813681F2E1156009E86F0 /* UserTableViewCell.swift */; };
 		757051C31F2B40380014B9B2 /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C21F2B40380014B9B2 /* MyTableViewController.swift */; };
 		757051C71F2B42B90014B9B2 /* Resipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757051C61F2B42B90014B9B2 /* Resipe.swift */; };
+		759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759247381F332B2F00B39ABF /* PromiseKit.framework */; };
+		7592473B1F332BC100B39ABF /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7592473A1F332BC100B39ABF /* PromiseKit.framework */; };
+		7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7592473A1F332BC100B39ABF /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		75B066F91F2A47A500A7D4E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */; };
 		75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FC1F2A47A500A7D4E0 /* Main.storyboard */; };
 		75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */; };
@@ -36,6 +39,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7592473D1F332BC100B39ABF /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResipeTableViewCell.swift; sourceTree = "<group>"; };
 		7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatingResipeViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +62,8 @@
 		753813681F2E1156009E86F0 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserTableViewCell.swift; path = ../UserTableViewCell.swift; sourceTree = "<group>"; };
 		757051C21F2B40380014B9B2 /* MyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
 		757051C61F2B42B90014B9B2 /* Resipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resipe.swift; sourceTree = "<group>"; };
+		759247381F332B2F00B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		7592473A1F332BC100B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		75B066F51F2A47A500A7D4E0 /* WorkWithRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkWithRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75B066FD1F2A47A500A7D4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -67,6 +86,8 @@
 			files = (
 				75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */,
 				75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */,
+				759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */,
+				7592473B1F332BC100B39ABF /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +104,7 @@
 		75B066EC1F2A47A500A7D4E0 = {
 			isa = PBXGroup;
 			children = (
+				7592473A1F332BC100B39ABF /* PromiseKit.framework */,
 				75B565121F3098C400F0F18F /* .swiftlint.yml */,
 				75B066F71F2A47A500A7D4E0 /* WorkWithRealm */,
 				75B0670C1F2A47A600A7D4E0 /* WorkWithRealmTests */,
@@ -133,6 +155,7 @@
 		75B067181F2A4D5400A7D4E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				759247381F332B2F00B39ABF /* PromiseKit.framework */,
 				75B067191F2A4D5600A7D4E0 /* Realm.framework */,
 				75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */,
 			);
@@ -150,6 +173,7 @@
 				75B066F21F2A47A500A7D4E0 /* Frameworks */,
 				75B066F31F2A47A500A7D4E0 /* Resources */,
 				75B0671D1F2A4D6E00A7D4E0 /* Run Script */,
+				7592473D1F332BC100B39ABF /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

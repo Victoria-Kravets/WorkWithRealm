@@ -8,6 +8,8 @@
 
 import UIKit
 import RealmSwift
+import AssetsLibrary.ALAssetsLibrary
+
 class CreatingResipeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let realm = try! Realm()

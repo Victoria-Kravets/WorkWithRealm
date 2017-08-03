@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import PromiseKit
 class MyTableViewController: UITableViewController {
     
     let realm = try! Realm()
@@ -71,31 +72,40 @@ class MyTableViewController: UITableViewController {
     func populateDefaultResipes() {
         
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
+
+            let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
+            for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+
+                let newResipe = Resipe()
+                newResipe.title = resipe[0]
+                newResipe.ingredience = resipe[1]
+                newResipe.steps = resipe[2]
+                let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
+                let img = UIImage(data: data as Data)
+                newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
+                newResipe.date = Date()
+                let user = User()
+                user.userName = resipe[4]
+                newResipe.creater = user
             
-            try! realm.write() { // adding records to database
-                
-                let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
-                for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
-                    let user = User()
-                    let newResipe = Resipe()
-                    newResipe.title = resipe[0]
-                    newResipe.ingredience = resipe[1]
-                    newResipe.steps = resipe[2]
-                    let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
-                    let img = UIImage(data: data as Data)
-                    newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
-                    newResipe.date = Date()
-                    user.userName = resipe[4]
-                    newResipe.creater = user
-                    self.realm.add(newResipe)
-                    user.resipe.append(newResipe)
-                    
+                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
+                    try! self.realm.write(){
+                        user.resipe.append(savedRecipe)
+                    }
                 }
             }
-            
             recipes = query.doQueryToRecipeInRealm()
         }
         
+    }
+    
+    func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
+        return Promise { fulfill, reject in
+            try! realm.write(){
+                self.realm.add(newResipe)
+                fulfill(newResipe)
+            }
+        }
     }
     
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
