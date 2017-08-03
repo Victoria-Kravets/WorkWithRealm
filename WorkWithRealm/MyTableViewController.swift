@@ -13,20 +13,29 @@ class MyTableViewController: UITableViewController {
     let realm = try! Realm()
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    let query = QueryToRealm()
     var resipes: Results<Resipe>!
     var recipes: Results<Resipe>{
         get{
-            resipes = realm.objects(Resipe.self)
+            if resipes == nil{
+                resipes = self.query.doQueryToRecipeInRealm()
+            }
             return resipes
         }
         set{
-            resipes = newValue
+            self.resipes = newValue
+            print(newValue)
+            print(resipes)
+            print(recipes)
         }
     }
     var users: Results<User>!
     var user: Results<User>{
         get{
-            users = realm.objects(User.self)
+            if users == nil{
+                users = self.query.doQueryToUserInRealm()
+            }
             return users
         }
         set{
@@ -35,7 +44,7 @@ class MyTableViewController: UITableViewController {
     }
     var chef: User!
     var selectedResipe = Resipe()
-    let query = QueryToRealm()
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -44,10 +53,8 @@ class MyTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         populateDefaultResipes()
-        print(recipes)
         if chef != nil{
             recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
-            
         }else{
             recipes = self.query.doQueryToRecipeInRealm()
         }
@@ -95,6 +102,7 @@ class MyTableViewController: UITableViewController {
         if sender.selectedSegmentIndex == 0{
             self.recipes = self.recipes.sorted(byKeyPath: "date")
         }else{
+            print(self.recipes)
             self.recipes = self.recipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
