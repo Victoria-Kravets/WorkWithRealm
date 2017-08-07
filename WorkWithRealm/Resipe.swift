@@ -23,7 +23,7 @@ class Resipe : Object {
     }
     func getRecipeImg() -> UIImage? {
         if self.image != nil{
-            let img = UIImage(data: self.image as! Data)!
+            let img = UIImage(data: self.image!)!
             return img
         }
         else {

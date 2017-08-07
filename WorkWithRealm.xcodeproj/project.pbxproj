@@ -27,6 +27,10 @@
 		75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
 		75B565131F3098C400F0F18F /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 75B565121F3098C400F0F18F /* .swiftlint.yml */; };
 		75C607AB1F31FAEB00A3FB5D /* QueryToRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */; };
+		E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; };
+		E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75B067191F2A4D5600A7D4E0 /* Realm.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; };
+		E9A909F91F38BC7A00571267 /* RealmSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 75B0671A1F2A4D5600A7D4E0 /* RealmSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +50,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				E9A909F71F38BC7600571267 /* Realm.framework in Embed Frameworks */,
 				7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */,
+				E9A909F91F38BC7A00571267 /* RealmSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,8 +92,10 @@
 			files = (
 				75B0671B1F2A4D5600A7D4E0 /* Realm.framework in Frameworks */,
 				75B0671C1F2A4D5600A7D4E0 /* RealmSwift.framework in Frameworks */,
+				E9A909F81F38BC7A00571267 /* RealmSwift.framework in Frameworks */,
 				759247391F332B2F00B39ABF /* PromiseKit.framework in Frameworks */,
 				7592473B1F332BC100B39ABF /* PromiseKit.framework in Frameworks */,
+				E9A909F61F38BC7600571267 /* Realm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
