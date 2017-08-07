@@ -92,6 +92,8 @@ class MyTableViewController: UITableViewController {
                     try! self.realm.write(){
                         user.resipe.append(savedRecipe)
                     }
+                    }.catch {error in
+                        print(error)
                 }
             }
             recipes = query.doQueryToRecipeInRealm()
@@ -167,7 +169,7 @@ class MyTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC"{
-            var ditailController = segue.destination as! DetailViewController
+            let ditailController = segue.destination as! DetailViewController
             ditailController.recipe = selectedResipe
         }
     }

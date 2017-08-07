@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
         createrLbl.text = recipe.creater?.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
-        imageView.image = UIImage(data: recipe.image as! Data)
+        imageView.image = UIImage(data: recipe.image!)
     }
     
     
