@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import AssetsLibrary.ALAssetsLibrary
+import PromiseKit
 
 class CreatingResipeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -41,8 +42,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         if title != "" && ingredients != "" && steps != "" && user != "" {
             let newResipe = Resipe()
             
-            let user = addRecipeToRealm(newResipe: newResipe)
-            addRecipeToUser(newResipe: newResipe, isUserInDB: user)
+            createRecipe(newResipe: newResipe)
+            
+            //addRecipeToUser(newResipe: newResipe, isUserInDB: user)
             
             self.navigationController?.popViewController(animated: true)
         }
@@ -51,7 +53,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             createAlert(title: "Warning", massage: "Please fill all textFields!")
         }
     }
-    func addRecipeToRealm(newResipe: Resipe) -> User {
+    func createRecipe(newResipe: Resipe) -> User {
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
@@ -70,10 +72,21 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.steps = steps
             newResipe.date = NSDate() as Date!
             newResipe.setRecipeImage(resipeImage.image!)
-            self.realm.add(newResipe)
+            addResipeToDatabase(newResipe: newResipe).then{ recipe in
+                self.addRecipeToUser(newResipe: recipe, isUserInDB: isUserInDB!)
+                
+            }
+            
         }
         return isUserInDB!
     }
+    func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
+        return Promise { fulfill, reject in
+            self.realm.add(newResipe)
+            fulfill(newResipe)
+        }
+    }
+    
     func addRecipeToUser(newResipe: Resipe, isUserInDB: User){
         try!realm.write {
             isUserInDB.resipe.append(newResipe)
