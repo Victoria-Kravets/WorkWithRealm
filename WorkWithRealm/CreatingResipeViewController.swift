@@ -74,7 +74,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.setRecipeImage(resipeImage.image!)
             addResipeToDatabase(newResipe: newResipe).then{ recipe in
                 self.addRecipeToUser(newResipe: recipe, isUserInDB: isUserInDB!)
-                
+                }.catch {error in
+                    print(error)
             }
             
         }
