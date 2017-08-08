@@ -15,7 +15,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     
     let realm = try! Realm()
     let query = QueryToRealm()
+    var recipe: Resipe!
     
+    @IBOutlet weak var createRecipeBtn: UIButton!
     @IBOutlet weak var createrOfResipe: UITextField!
     @IBOutlet weak var resipeTitle: UITextField!
     @IBOutlet weak var resipeIngredients: UITextField!
@@ -26,6 +28,17 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         super.viewDidLoad()
         configurePicker()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if recipe != nil{
+            createrOfResipe.text = recipe.creater?.userName
+            resipeTitle.text = recipe.title
+            resipeIngredients.text = recipe.ingredience
+            resipeSteps.text = recipe.steps
+            resipeImage.image = UIImage(data: recipe.image!)
+            createRecipeBtn.titleLabel?.text = "Edit recipe"
+        }
+    }
     func configurePicker(){
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
@@ -34,25 +47,57 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         present(imagePicker, animated: true, completion: nil)
     }
     @IBAction func createResipeButtonPressed(_ sender: UIButton) {
+        
+            let title = resipeTitle.text!
+            let ingredients = resipeIngredients.text!
+            let steps = resipeSteps.text!
+            let user = createrOfResipe.text!
+            
+            if title != "" && ingredients != "" && steps != "" && user != "" {
+                if recipe == nil{
+                   let newRecipe = Resipe()
+                    createRecipe(newResipe: newRecipe)
+                }else{
+                    editRecipe(recipe: recipe)
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
+            
+            if title == "" || ingredients == "" || steps == "" || user == "" {
+                createAlert(title: "Warning", massage: "Please fill all textFields!")
+            }
+            
+        
+    }
+    func editRecipe(recipe: Resipe){
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
-        let user = createrOfResipe.text!
+        let userName = createrOfResipe.text!
+        let editRecipe = Resipe()
         
-        if title != "" && ingredients != "" && steps != "" && user != "" {
-            let newResipe = Resipe()
-            
-            createRecipe(newResipe: newResipe)
-            
-            //addRecipeToUser(newResipe: newResipe, isUserInDB: user)
-            
-            self.navigationController?.popViewController(animated: true)
-        }
-        
-        if title == "" || ingredients == "" || steps == "" || user == "" {
-            createAlert(title: "Warning", massage: "Please fill all textFields!")
+        let currentRecipe = self.query.doQueryToRecipeInRealm().filter("title = '\(recipe.title)'").first!
+        print("----------------------------------------------")
+        print(currentRecipe)
+        try! realm.write {
+            currentRecipe.creater?.userName = userName
+            currentRecipe.title = title
+            currentRecipe.ingredience = ingredients
+            currentRecipe.steps = steps
+            currentRecipe.setRecipeImage(resipeImage.image!)
+//            editRecipeInDatabase(editRecipe: editRecipe).then{_ in
+//                print("All right!")
+//            }
         }
     }
+//    func editRecipeInDatabase(editRecipe: Resipe) -> Promise<Resipe>{
+//        return Promise{fulfill, reject in
+//           self.realm.add(editRecipe, update: true)
+//        }
+//    }
+//    func editRecipeToUser(){
+//        
+//    }
     func createRecipe(newResipe: Resipe) -> User {
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
