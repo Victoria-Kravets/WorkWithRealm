@@ -26,9 +26,6 @@ class MyTableViewController: UITableViewController {
         }
         set{
             self.resipes = newValue
-            print(newValue)
-            print(resipes)
-            print(recipes)
         }
     }
     var users: Results<User>!
@@ -114,7 +111,6 @@ class MyTableViewController: UITableViewController {
         if sender.selectedSegmentIndex == 0{
             self.recipes = self.recipes.sorted(byKeyPath: "date")
         }else{
-            print(self.recipes)
             self.recipes = self.recipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
@@ -157,6 +153,7 @@ class MyTableViewController: UITableViewController {
             try! realm.write() {
                 let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
                 let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
+                print(self.recipes[indexPath.row])
                 self.realm.delete(self.recipes[indexPath.row])
                 if self.query.doQueryToUserInRealm().filter("userName = '\(recipeName)'").first?.resipe.count == 0 {
                     self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))

@@ -36,7 +36,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             resipeIngredients.text = recipe.ingredience
             resipeSteps.text = recipe.steps
             resipeImage.image = UIImage(data: recipe.image!)
-            createRecipeBtn.titleLabel?.text = "Edit recipe"
+            createRecipeBtn.setTitle("Save recipe", for: .normal)
         }
     }
     func configurePicker(){
@@ -58,7 +58,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                    let newRecipe = Resipe()
                     createRecipe(newResipe: newRecipe)
                 }else{
-                    editRecipe(recipe: recipe)
+                    deleteRecipe(recipe: recipe)
                 }
                 self.navigationController?.popViewController(animated: true)
             }
@@ -69,35 +69,30 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             
         
     }
-    func editRecipe(recipe: Resipe){
-        let title = resipeTitle.text!
-        let ingredients = resipeIngredients.text!
-        let steps = resipeSteps.text!
-        let userName = createrOfResipe.text!
-        let editRecipe = Resipe()
-        
-        let currentRecipe = self.query.doQueryToRecipeInRealm().filter("title = '\(recipe.title)'").first!
-        print("----------------------------------------------")
-        print(currentRecipe)
+    func deleteRecipe(recipe: Resipe){
+        let object = self.query.doQueryToRecipeInRealm().filter("title = '\(recipe.title)'")
         try! realm.write {
-            currentRecipe.creater?.userName = userName
-            currentRecipe.title = title
-            currentRecipe.ingredience = ingredients
-            currentRecipe.steps = steps
-            currentRecipe.setRecipeImage(resipeImage.image!)
-//            editRecipeInDatabase(editRecipe: editRecipe).then{_ in
-//                print("All right!")
-//            }
+            realm.delete(object)
         }
     }
-//    func editRecipeInDatabase(editRecipe: Resipe) -> Promise<Resipe>{
-//        return Promise{fulfill, reject in
-//           self.realm.add(editRecipe, update: true)
+//    func editRecipe(recipe: Resipe){
+//        let title = resipeTitle.text!
+//        let ingredients = resipeIngredients.text!
+//        let steps = resipeSteps.text!
+//        let userName = createrOfResipe.text!
+//        let editRecipe = Resipe()
+//        
+//        let currentRecipe = self.query.doQueryToRecipeInRealm().filter("title = '\(recipe.title)'").first!
+//        try! realm.write {
+//            currentRecipe.creater?.userName = userName
+//            currentRecipe.title = title
+//            currentRecipe.ingredience = ingredients
+//            currentRecipe.steps = steps
+//            currentRecipe.setRecipeImage(resipeImage.image!)
+//
 //        }
 //    }
-//    func editRecipeToUser(){
-//        
-//    }
+
     func createRecipe(newResipe: Resipe) -> User {
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
