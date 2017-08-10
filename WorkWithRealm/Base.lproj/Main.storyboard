@@ -71,7 +71,6 @@
                                 <state key="normal" title="Create resipe"/>
                                 <connections>
                                     <action selector="createResipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dof-KI-bW5"/>
-                                    <segue destination="sA6-Ph-kWr" kind="show" identifier="goToRootVC" id="VGH-Cr-T2M"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -401,7 +400,7 @@
         <image name="2.jpeg" width="300" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VGH-Cr-T2M"/>
+        <segue reference="r3v-HW-G68"/>
         <segue reference="xHG-dE-zR5"/>
     </inferredMetricsTieBreakers>
 </document>

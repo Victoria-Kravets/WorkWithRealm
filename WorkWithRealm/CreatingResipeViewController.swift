@@ -55,30 +55,27 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             
             if title != "" && ingredients != "" && steps != "" && user != "" {
                 if recipe == nil{
-                   let newRecipe = Resipe()
-                    createRecipe(newResipe: newRecipe)
+                    createRecipe()
                     self.navigationController?.popViewController(animated: true)
                 }else{
-                    deleteRecipe(recipe: recipe)
-//                    let rootViewController = MyTableViewController()
-//                    self.navigationController?.show(rootViewController, sender: nil)
-                    print(self.query.doQueryToRecipeInRealm())
+                    editRecipe(recipe: recipe)
                     self.navigationController?.popToRootViewController(animated: true)
                 }
-               
-                
             }
             
             if title == "" || ingredients == "" || steps == "" || user == "" {
                 createAlert(title: "Warning", massage: "Please fill all textFields!")
             }
-            
         
     }
     func deleteRecipe(recipe: Resipe){
         let object = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'")
+        let user = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first?.creater.first?.userName
         try! realm.write {
             self.realm.delete(object)
+            if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first?.resipe.count == 0 {
+                self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
+            }
         }
     }
     func editRecipe(recipe: Resipe){
@@ -87,32 +84,26 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        print(userName)
         var currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first!
-        try! realm.write {
-            
+        
             if userName != recipe.creater.first!.userName{
-                print(self.query.doQueryToUserInRealm())
-                var userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
-                if userInDB != nil{
-                
-                }else{
-//                    currentRecipe?.creater.first?
-//                    currentRecipe?.creater.first = User(name: userName)
-//                    self.realm.create(Resipe.self, value: currentRecipe?.creater, update: true)
-                   
-                }
+                deleteRecipe(recipe: recipe)
+                createRecipe()
+
             }else{
-                currentRecipe?.title = title
-                currentRecipe?.ingredience = ingredients
-                currentRecipe?.steps = steps
-                currentRecipe?.setRecipeImage(resipeImage.image!)
+                try! realm.write {
+                    currentRecipe?.title = title
+                    currentRecipe?.ingredience = ingredients
+                    currentRecipe?.steps = steps
+                    currentRecipe?.setRecipeImage(resipeImage.image!)
+                }
             }
             
-        }
+        
     }
 
-    func createRecipe(newResipe: Resipe) {
+    func createRecipe() {
+        let newResipe = Resipe()
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
