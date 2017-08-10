@@ -71,9 +71,11 @@ class MyTableViewController: UITableViewController {
         if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
 
             let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
-            for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
+            var count = 0
+            for resipe in defaultResipes { // creating new instance for each recipe, fill properties adn adding object to realm
 
                 let newResipe = Resipe()
+                newResipe.id = String(count)
                 newResipe.title = resipe[0]
                 newResipe.ingredience = resipe[1]
                 newResipe.steps = resipe[2]
@@ -81,19 +83,25 @@ class MyTableViewController: UITableViewController {
                 let img = UIImage(data: data as Data)
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
-                let user = User()
-                user.userName = resipe[4]
-                newResipe.creater = user
-            
-                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
-                    try! self.realm.write(){
-                        user.resipe.append(savedRecipe)
-                    }
-                    }.catch {error in
-                        print(error)
+                let user = User(name: resipe[4])
+                print(user)
+                try! self.realm.write {
+                    self.realm.add(user)
+                    let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
+                    userInDB?.resipe.append(newResipe)
                 }
+                
+//                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
+//                    try! self.realm.write(){
+//                        user.resipe.append(savedRecipe)
+//                    }
+//                    }.catch {error in
+//                        print(error)
+//                }
+                count += 1
             }
             recipes = query.doQueryToRecipeInRealm()
+            print(recipes)
         }
         
     }
@@ -151,7 +159,7 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write() {
-                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
+//                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.userName //!!
                 let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
                 print(self.recipes[indexPath.row])
                 self.realm.delete(self.recipes[indexPath.row])

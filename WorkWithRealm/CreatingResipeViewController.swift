@@ -31,7 +31,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         if recipe != nil{
-            createrOfResipe.text = recipe.creater?.userName
+//            createrOfResipe.text = recipe.creater.userName //!!
             resipeTitle.text = recipe.title
             resipeIngredients.text = recipe.ingredience
             resipeSteps.text = recipe.steps
@@ -93,7 +93,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
 //        }
 //    }
 
-    func createRecipe(newResipe: Resipe) -> User {
+    func createRecipe(newResipe: Resipe) {
         let title = resipeTitle.text!
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
@@ -101,25 +101,33 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
         
         try! realm.write(){
-            if isUserInDB != nil {
-                newResipe.creater = isUserInDB
-            }else{
-                isUserInDB = User(name: userName)
-                newResipe.creater = isUserInDB
-            }
+            print(Int(self.query.doQueryToRecipeInRealm().last!.id)! + 1)
+            newResipe.id = String(Int(self.query.doQueryToRecipeInRealm().last!.id)! + 1)
             newResipe.title = title
             newResipe.ingredience = ingredients
             newResipe.steps = steps
             newResipe.date = NSDate() as Date!
             newResipe.setRecipeImage(resipeImage.image!)
-            addResipeToDatabase(newResipe: newResipe).then{ recipe in
-                self.addRecipeToUser(newResipe: recipe, isUserInDB: isUserInDB!)
-                }.catch {error in
-                    print(error)
+            if isUserInDB != nil {
+                isUserInDB?.resipe.append(newResipe) //!!
+            }else{
+                isUserInDB = User(name: userName)
+                self.realm.add(isUserInDB!)
+                let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
+                user?.resipe.append(newResipe)
+
+                
+
             }
             
+//            addResipeToDatabase(newResipe: newResipe).then{ recipe in
+//                self.addRecipeToUser(newResipe: recipe, isUserInDB: isUserInDB!)
+//                }.catch {error in
+//                    print(error)
+//            }
+            
         }
-        return isUserInDB!
+       
     }
     func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
         return Promise { fulfill, reject in

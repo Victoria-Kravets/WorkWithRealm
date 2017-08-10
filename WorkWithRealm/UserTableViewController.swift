@@ -63,7 +63,7 @@ class UserTableViewController: UITableViewController {
         
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!
+//        user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater //!!
         return indexPath
     }
     

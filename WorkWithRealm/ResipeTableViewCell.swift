@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ResipeTableViewCell: UITableViewCell {
-    
+    let realm = try! Realm()
+    let query = QueryToRealm()
     @IBOutlet weak var resipeImage: UIImageView!
     @IBOutlet weak var resipeTitle: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
@@ -23,10 +25,11 @@ class ResipeTableViewCell: UITableViewCell {
         
         dateLbl.text = date
         resipeImage.image = resipe.getRecipeImg()
-        createrLbl.text = resipe.creater?.userName
-        if let name = resipe.creater?.userName{
-            createrLbl.text = "by: " + name
-        }
+//        let nameOfChef = self.query.doQueryToRecipeInRealm().filter("title = '\(resipe.title)'").fi
+//        createrLbl.text = resipe.creater.userName // !!
+//        if let name = resipe.creater.userName{
+//            createrLbl.text = "by: " + name
+//        }
     }
     
 }

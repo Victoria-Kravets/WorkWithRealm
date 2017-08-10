@@ -11,12 +11,16 @@ import RealmSwift
 import UIKit
 class Resipe : Object {
     
+    dynamic var id = UUID().uuidString
     dynamic var title = ""
     dynamic var ingredience = ""
     dynamic var steps = ""
     dynamic var date : Date!
     dynamic var image : Data?
-    dynamic var creater: User?
+    dynamic var recipeId: String {
+        return "\(id)"
+    }
+    var creater = LinkingObjects(fromType: User.self, property: "resipe")
     func setRecipeImage(_ img: UIImage) {
         let data = UIImagePNGRepresentation(img)
         self.image = data
@@ -30,5 +34,9 @@ class Resipe : Object {
             return nil
         }
     }
+    override static func primaryKey() -> String? {
+        return "id"
+    }
+
     
 }
