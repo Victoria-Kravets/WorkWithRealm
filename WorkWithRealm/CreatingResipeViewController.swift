@@ -70,10 +70,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     }
     func deleteRecipe(recipe: Resipe){
         let object = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'")
-        let user = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first?.creater.first?.userName
+        let user = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first!.creater.first!.userName
         try! realm.write {
             self.realm.delete(object)
-            if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first?.resipe.count == 0 {
+            if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first!.resipe.count == 0 {
                 self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
             }
         }
