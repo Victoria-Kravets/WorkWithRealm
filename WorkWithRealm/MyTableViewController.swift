@@ -159,7 +159,7 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write() {
-//                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.userName //!!
+                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
                 let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
                 print(self.recipes[indexPath.row])
                 self.realm.delete(self.recipes[indexPath.row])
