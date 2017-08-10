@@ -27,9 +27,6 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         configurePicker()
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         if recipe != nil{
             createrOfResipe.text = recipe.creater.first?.userName
             resipeTitle.text = recipe.title
@@ -38,6 +35,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             resipeImage.image = UIImage(data: recipe.image!)
             createRecipeBtn.setTitle("Save recipe", for: .normal)
         }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
     }
     func configurePicker(){
         imagePicker.delegate = self
@@ -156,7 +157,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         self.present(alert, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        resipeImage.image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        //resipeImage.image = nil
+        let image = info[UIImagePickerControllerOriginalImage] as? UIImage
+        resipeImage.image = image!
         self.dismiss(animated: true, completion: nil)
     }
 }

@@ -176,8 +176,8 @@ class MyTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC"{
-            let ditailController = segue.destination as! DetailViewController
-            ditailController.recipe = selectedResipe
+            let detailController = segue.destination as! DetailViewController
+            detailController.recipe = selectedResipe
         }
     }
     
