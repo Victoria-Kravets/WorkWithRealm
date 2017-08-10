@@ -52,7 +52,10 @@ class MyTableViewController: UITableViewController {
         super.viewWillAppear(true)
         populateDefaultResipes()
         if chef != nil{
-            recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
+            print(chef.userName)
+//            recipes = self.query.doQueryToRecipeInRealm().filter("creater[FIRST].userName == %@", chef.userName)
+          //  recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
+            print(recipes)
         }else{
             recipes = self.query.doQueryToRecipeInRealm()
         }
@@ -161,9 +164,8 @@ class MyTableViewController: UITableViewController {
             try! realm.write() {
                 let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
                 let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
-                print(self.recipes[indexPath.row])
                 self.realm.delete(self.recipes[indexPath.row])
-                if self.query.doQueryToUserInRealm().filter("userName = '\(recipeName)'").first?.resipe.count == 0 {
+                if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first?.resipe.count == 0 {
                     self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
                 }
             }

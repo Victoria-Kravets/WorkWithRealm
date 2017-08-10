@@ -22,7 +22,7 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         titleLbl.text = recipe.title
-//        createrLbl.text = recipe.creater.userName //!!
+        createrLbl.text = recipe.creater.first!.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
         imageView.image = UIImage(data: recipe.image!)

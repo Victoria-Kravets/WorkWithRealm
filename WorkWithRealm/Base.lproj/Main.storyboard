@@ -71,6 +71,7 @@
                                 <state key="normal" title="Create resipe"/>
                                 <connections>
                                     <action selector="createResipeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dof-KI-bW5"/>
+                                    <segue destination="sA6-Ph-kWr" kind="show" identifier="goToRootVC" id="VGH-Cr-T2M"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -172,7 +173,7 @@
                             </connections>
                         </barButtonItem>
                         <button key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CqL-8E-vKr">
-                            <rect key="frame" x="87" y="7" width="150" height="30"/>
+                            <rect key="frame" x="112.5" y="7" width="150" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="All Recipes"/>
                             <connections>
@@ -400,7 +401,7 @@
         <image name="2.jpeg" width="300" height="168"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2zk-UU-ouL"/>
-        <segue reference="r3v-HW-G68"/>
+        <segue reference="VGH-Cr-T2M"/>
+        <segue reference="xHG-dE-zR5"/>
     </inferredMetricsTieBreakers>
 </document>
