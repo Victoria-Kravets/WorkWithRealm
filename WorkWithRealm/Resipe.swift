@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import UIKit
+import ObjectMapper
 class Resipe : Object {
     
     dynamic var id = UUID().uuidString
