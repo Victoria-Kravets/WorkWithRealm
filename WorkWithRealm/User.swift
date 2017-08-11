@@ -34,7 +34,7 @@ class User: Object, Mappable {
     }
     func mapping(map: Map) {
         userName <- map["userName"]
-        resipe <- map["resipe"]
+        resipe <- (map["resipe"], ListTransform<Resipe>())
         countOfResipe <- map["countOfResipe"]
     }
     
