@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import PromiseKit
+import ObjectMapper
+
 class MyTableViewController: UITableViewController {
     
     let realm = try! Realm()
@@ -86,13 +88,26 @@ class MyTableViewController: UITableViewController {
                 let img = UIImage(data: data as Data)
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
+//                let jsonRecipe = newResipe.toJSONString(prettyPrint: true)
+//                print(jsonRecipe)
                 let user = User(name: resipe[4])
-                print(user)
+                //print(user)
                 try! self.realm.write {
                     self.realm.add(user)
                     let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
                     userInDB?.resipe.append(newResipe)
+                    let jsonUser =  Mapper<User>().toJSON(userInDB!)
+                    print(jsonUser)
+                    let recipeInDB = self.query.doQueryToRecipeInRealm().filter("id = '\(count)'").first!
+                    //print(recipeInDB)
+                    let jsonRecipe = Mapper<Resipe>().toJSON(newResipe)
+                    print(jsonRecipe)
+                    
+
                 }
+//                let json = newResipe.toJSONString()
+//                print(json)
+                
                 
 //                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
 //                    try! self.realm.write(){
@@ -104,7 +119,7 @@ class MyTableViewController: UITableViewController {
                 count += 1
             }
             recipes = query.doQueryToRecipeInRealm()
-            print(recipes)
+            
         }
         
     }

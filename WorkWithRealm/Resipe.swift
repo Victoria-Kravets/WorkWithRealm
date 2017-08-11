@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import UIKit
 import ObjectMapper
-class Resipe : Object {
+class Resipe : Object, Mappable {
     
     dynamic var id = UUID().uuidString
     dynamic var title = ""
@@ -18,9 +18,9 @@ class Resipe : Object {
     dynamic var steps = ""
     dynamic var date : Date!
     dynamic var image : Data?
-    dynamic var recipeId: String {
-        return "\(id)"
-    }
+//    dynamic var recipeId: String {
+//        return "\(id)"
+//    }
     var creater = LinkingObjects(fromType: User.self, property: "resipe")
     func setRecipeImage(_ img: UIImage) {
         let data = UIImagePNGRepresentation(img)
@@ -37,6 +37,24 @@ class Resipe : Object {
     }
     override static func primaryKey() -> String? {
         return "id"
+    }
+    
+
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+        if id == nil{
+             id <- map["id"]
+        }
+    
+        title <- map["title"]
+        ingredience <- map["ingredience"]
+        steps <- map["steps"]
+        date <- map["date"]
+        image <- map["image"]
+        creater <- map["creater"]
+        
     }
 
     
