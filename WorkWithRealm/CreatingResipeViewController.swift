@@ -36,8 +36,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             createRecipeBtn.setTitle("Save recipe", for: .normal)
         }
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         
     }
     func configurePicker(){
@@ -57,9 +57,11 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             if title != "" && ingredients != "" && steps != "" && user != "" {
                 if recipe == nil{
                     createRecipe()
+                    writeRecipeToJSON()
                     self.navigationController?.popViewController(animated: true)
                 }else{
                     editRecipe(recipe: recipe)
+                    writeRecipeToJSON()
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }
@@ -68,6 +70,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 createAlert(title: "Warning", massage: "Please fill all textFields!")
             }
         
+    }
+    func writeRecipeToJSON(){
+        let recipes = query.doQueryToRecipeInRealm()
+        let currentUsers = query.doQueryToUserInRealm()
+        let jsonFile = WorkWithJSON()
+        jsonFile.saveToJSONFile(objects: currentUsers)
+        jsonFile.saveToJSONFile(objects: recipes)
     }
     func deleteRecipe(recipe: Resipe){
         let object = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'")

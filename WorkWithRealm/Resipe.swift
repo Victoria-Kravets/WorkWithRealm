@@ -47,13 +47,12 @@ class Resipe : Object, Mappable {
         if id == nil{
              id <- map["id"]
         }
-    
         title <- map["title"]
         ingredience <- map["ingredience"]
         steps <- map["steps"]
         date <- map["date"]
         image <- map["image"]
-        creater <- map["creater"]
+//        creater <- map["creater"]
         
     }
 

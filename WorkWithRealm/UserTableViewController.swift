@@ -58,6 +58,7 @@ class UserTableViewController: UITableViewController {
             }else if arrayOfChefs[indexPath.row].countOfResipe >= 1{
                 cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
             }
+            print(String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes")
             return cell
         }
         return UITableViewCell()

@@ -96,17 +96,7 @@ class MyTableViewController: UITableViewController {
                     self.realm.add(user)
                     let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
                     userInDB?.resipe.append(newResipe)
-                    let jsonUser =  Mapper<User>().toJSON(userInDB!)
-                    print(jsonUser)
-                    let recipeInDB = self.query.doQueryToRecipeInRealm().filter("id = '\(count)'").first!
-                    //print(recipeInDB)
-                    let jsonRecipe = Mapper<Resipe>().toJSON(newResipe)
-                    print(jsonRecipe)
-                    
-
                 }
-//                let json = newResipe.toJSONString()
-//                print(json)
                 
                 
 //                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
@@ -119,7 +109,10 @@ class MyTableViewController: UITableViewController {
                 count += 1
             }
             recipes = query.doQueryToRecipeInRealm()
-            
+            let currentUsers = query.doQueryToUserInRealm()
+            let jsonFile = WorkWithJSON()
+            jsonFile.saveToJSONFile(objects: currentUsers)
+            jsonFile.saveToJSONFile(objects: recipes)
         }
         
     }
