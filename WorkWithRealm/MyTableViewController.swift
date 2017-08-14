@@ -64,6 +64,7 @@ class MyTableViewController: UITableViewController {
         }
         
         tableView.reloadData()
+        
     }
     
     @IBAction func viewAllRecipes(_ sender: UIButton) {
@@ -97,6 +98,7 @@ class MyTableViewController: UITableViewController {
                     self.realm.add(user)
                     let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
                     userInDB?.resipe.append(newResipe)
+                    userInDB?.countOfResipe += 1
                 }
                 
                 

@@ -129,11 +129,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.setRecipeImage(resipeImage.image!)
             if isUserInDB != nil {
                 isUserInDB?.resipe.append(newResipe) //!!
+                isUserInDB?.countOfResipe += 1
             }else{
                 isUserInDB = User(name: userName)
                 self.realm.add(isUserInDB!)
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
                 user?.resipe.append(newResipe)
+                user?.countOfResipe += 1
 
                 
 
