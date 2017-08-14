@@ -10,6 +10,7 @@ import UIKit
 import RealmSwift
 import PromiseKit
 import ObjectMapper
+import Alamofire
 
 class MyTableViewController: UITableViewController {
     
