@@ -86,26 +86,30 @@ class WorkWithJSON{
         
         
     }
-//    func postJSONToServer(user: User){
-//        let url = "http://localhost:3000/users"
-//        let params: [String: Any] = [
-//            "userName" : user.userName,
-//            "countOfResipe" : user.countOfResipe,
-//            "resipe" :  user.resipe.first
-//        ]
-//        let param =
-//        request(url).responseJSON{ responseJSON in
-//            switch responseJSON.result{
-//            case .success(let value):
-//                if let jsonObject = Mapper<User>().toJSON(user){
-//                    let post = Post(json: jsonObject)
-//                    print(post)
-//                }
-//                
-//            }
-//            
-//        }
-//    }
+    func postJSONToServer(user: User){
+        let url = "http://localhost:3000/users"
+        let params: [String: Any] = [
+            "userName" : user.userName,
+            "countOfResipe" : user.countOfResipe,
+            "resipe" :  user.resipe.first
+        ]
+        
+        let jsonUser = user.toJSON()
+        print(jsonUser)
+        request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
+            
+            switch responseJSON.result {
+            case .success(let value):
+                let jsonObject = responseJSON.result.value //value as? [String: Any],
+                print(jsonObject)
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    
+    
+    }
     
     
 }

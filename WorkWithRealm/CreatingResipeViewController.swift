@@ -136,7 +136,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
                 user?.resipe.append(newResipe)
                 user?.countOfResipe = (user?.resipe.count)!
-
+                let json = WorkWithJSON()
+                json.postJSONToServer(user: user!)
             }
             
 //            addResipeToDatabase(newResipe: newResipe).then{ recipe in
