@@ -64,6 +64,8 @@ class MyTableViewController: UITableViewController {
         }
         print(self.query.doQueryToUserInRealm())
         tableView.reloadData()
+        let jsonFile = WorkWithJSON()
+        jsonFile.getJSONFromServer()
         
     }
     

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 import ObjectMapper
-
+import Alamofire
 class WorkWithJSON{
     
     func saveToJSONFile<T>(objects: Results<T>){
@@ -50,6 +50,23 @@ class WorkWithJSON{
             }
         }
     }
-     
+    func getJSONFromServer() {
+        let url = "http://localhost:3000/db"
+        Alamofire.request(url).responseJSON{ response in
+            let result = response.result
+            print(result)
+            let value = result.value!
+            print(value)
+          
+        }
+        
+    }
+    func putJSONFromServer(){
+        
+    }
+    func postJSONFromServer(){
+        
+    }
+    
 
 }
