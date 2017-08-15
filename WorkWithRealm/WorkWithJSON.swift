@@ -85,8 +85,10 @@ class WorkWithJSON{
                                             print(steps)
                                         }
                                         print(recipe["date"])
-                                        if let date = recipe["date"] as? Date{
-                                            print(date)
+                                        if let date = recipe["date"] as? Double{
+                                            let dateTransformer = DateTransform()
+                                            let dateOfCreating = dateTransformer.transformFromJSON(date)
+                                            print(dateOfCreating)
                                         }
                                     }
                                 }
