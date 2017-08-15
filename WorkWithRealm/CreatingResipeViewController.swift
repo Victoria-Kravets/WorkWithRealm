@@ -134,32 +134,23 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 isUserInDB = User(name: userName)
                 self.realm.add(isUserInDB!)
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
-                user?.resipe.append(newResipe)
-                user?.countOfResipe = (user?.resipe.count)!
+                
                 let json = WorkWithJSON()
-                json.postJSONToServer(user: user!)
+                addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then{ user in
+                    json.postJSONToServer(user: user).then{_ in
+                        print("User added to server DB")
+                    }
+                }
             }
-            
-//            addResipeToDatabase(newResipe: newResipe).then{ recipe in
-//                self.addRecipeToUser(newResipe: recipe, isUserInDB: isUserInDB!)
-//                }.catch {error in
-//                    print(error)
-//            }
-            
-        }
-       
-    }
-    func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
-        return Promise { fulfill, reject in
-            self.realm.add(newResipe)
-            fulfill(newResipe)
         }
     }
     
-    func addRecipeToUser(newResipe: Resipe, isUserInDB: User){
-        try!realm.write {
+    func addRecipeToUser(newResipe: Resipe, isUserInDB: User) -> Promise<User>{
+        return Promise<User> { fulfill, reject in
             isUserInDB.resipe.append(newResipe)
+            isUserInDB.countOfResipe = isUserInDB.resipe.count
         }
+        
     }
     func createAlert(title: String, massage: String){
         let alert = UIAlertController(title: title, message: massage, preferredStyle: UIAlertControllerStyle.alert)
