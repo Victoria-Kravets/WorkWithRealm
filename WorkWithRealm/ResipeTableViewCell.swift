@@ -25,7 +25,7 @@ class ResipeTableViewCell: UITableViewCell {
         
         dateLbl.text = date
         resipeImage.image = resipe.getRecipeImg()
-        let nameOfChef = self.query.doQueryToRecipeInRealm().filter("id = '\(resipe.id)'").first!.creater.first!.userName
+        let nameOfChef = self.query.doQueryToRecipeInRealm().filter("id = \(resipe.id)").first!.creater.first!.userName
         createrLbl.text = "by: " + nameOfChef
     }
     

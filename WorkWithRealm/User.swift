@@ -12,15 +12,15 @@ import ObjectMapper
 
 class User: Object, Mappable {
     dynamic var userName = ""
-    var count = 0
     var resipe = List<Resipe>()
+    var count = 0
     dynamic var countOfResipe : Int{
         get{
             count = resipe.count
             return count
         }
         set{
-            count = newValue
+           count = newValue
         }
         
         

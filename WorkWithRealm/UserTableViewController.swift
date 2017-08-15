@@ -37,7 +37,6 @@ class UserTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print(self.query.doQueryToUserInRealm())
         super.viewWillAppear(true)
         tableView.reloadData()
     }
@@ -58,7 +57,6 @@ class UserTableViewController: UITableViewController {
             }else if arrayOfChefs[indexPath.row].countOfResipe >= 1{
                 cell.countOfResipe.text = String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes"
             }
-            print(String(arrayOfChefs[indexPath.row].countOfResipe) + " resipes")
             return cell
         }
         return UITableViewCell()
@@ -66,7 +64,6 @@ class UserTableViewController: UITableViewController {
     }
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first
-        print(user)
         return indexPath
     }
     

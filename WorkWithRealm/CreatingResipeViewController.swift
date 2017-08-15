@@ -79,8 +79,8 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         jsonFile.saveToJSONFile(objects: recipes)
     }
     func deleteRecipe(recipe: Resipe){
-        let object = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'")
-        let user = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first!.creater.first!.userName
+        let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
+        let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
         try! realm.write {
             self.realm.delete(object)
             if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first!.resipe.count == 0 {
@@ -94,7 +94,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        var currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = '\(recipe.id)'").first!
+        var currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
         
             if userName != recipe.creater.first!.userName{
                 deleteRecipe(recipe: recipe)
@@ -121,7 +121,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
         
         try! realm.write(){
-            newResipe.id = String(Int(self.query.doQueryToRecipeInRealm().last!.id)! + 1)
+            newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
             newResipe.title = title
             newResipe.ingredience = ingredients
             newResipe.steps = steps
@@ -129,15 +129,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.setRecipeImage(resipeImage.image!)
             if isUserInDB != nil {
                 isUserInDB?.resipe.append(newResipe) //!!
-                isUserInDB?.countOfResipe += 1
+                isUserInDB?.countOfResipe = isUserInDB!.resipe.count
             }else{
                 isUserInDB = User(name: userName)
                 self.realm.add(isUserInDB!)
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
                 user?.resipe.append(newResipe)
-                user?.countOfResipe += 1
-
-                
+                user?.countOfResipe = (user?.resipe.count)!
 
             }
             
@@ -168,7 +166,6 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         self.present(alert, animated: true, completion: nil)
     }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //resipeImage.image = nil
         let image = info[UIImagePickerControllerOriginalImage] as? UIImage
         resipeImage.image = image!
         self.dismiss(animated: true, completion: nil)

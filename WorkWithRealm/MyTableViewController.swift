@@ -62,7 +62,7 @@ class MyTableViewController: UITableViewController {
         }else{
             recipes = self.query.doQueryToRecipeInRealm()
         }
-        
+        print(self.query.doQueryToUserInRealm())
         tableView.reloadData()
         
     }
@@ -82,7 +82,7 @@ class MyTableViewController: UITableViewController {
             for resipe in defaultResipes { // creating new instance for each recipe, fill properties adn adding object to realm
 
                 let newResipe = Resipe()
-                newResipe.id = String(count)
+                newResipe.id = count
                 newResipe.title = resipe[0]
                 newResipe.ingredience = resipe[1]
                 newResipe.steps = resipe[2]
@@ -90,15 +90,13 @@ class MyTableViewController: UITableViewController {
                 let img = UIImage(data: data as Data)
                 newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
                 newResipe.date = Date()
-//                let jsonRecipe = newResipe.toJSONString(prettyPrint: true)
-//                print(jsonRecipe)
                 let user = User(name: resipe[4])
-                //print(user)
+                
                 try! self.realm.write {
                     self.realm.add(user)
                     let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
                     userInDB?.resipe.append(newResipe)
-                    userInDB?.countOfResipe += 1
+                    userInDB?.countOfResipe = user.resipe.count
                 }
                 
                 
@@ -173,11 +171,13 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             try! realm.write() {
-                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
-                let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
+                let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
                 self.realm.delete(self.recipes[indexPath.row])
-                if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first?.resipe.count == 0 {
-                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
+                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
+                user.countOfResipe = user.resipe.count
+                if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
+                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+                    
                 }
             }
             tableView.deleteRows(at: [indexPath], with: .fade)

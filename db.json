@@ -3,9 +3,24 @@
     {
       "id": 1,
       "title": "hello"
+    },
+    {
+      "title": "FUck OFF",
+      "id": 2
     }
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "userman": [
+    {
+      "title": "FUck OFF please",
+      "name": "sadasd",
+      "id": 1
+    },
+    {
+      "title": "kasdkas",
+      "id": 2
+    }
+  ]
 }
