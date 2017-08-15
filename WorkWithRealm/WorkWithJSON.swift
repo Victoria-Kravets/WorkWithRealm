@@ -11,6 +11,7 @@ import RealmSwift
 import ObjectMapper
 import Alamofire
 import AlamofireObjectMapper
+import PromiseKit
 
 class WorkWithJSON{
     
@@ -52,68 +53,59 @@ class WorkWithJSON{
             }
         }
     }
-    func getJSONFromServer() {
-        let url = "http://localhost:3000/db"
-        Alamofire.request(url).responseJSON{ response in
-            if let value = response.result.value! as? Dictionary<String, Any>{
-                
-                if let users = value["users"] as? Array<Any>{
-                    for element in users{
-                        if let user = element as? Dictionary<String, Any>{
-                            print(user)
-                            if let userName = user["userName"] as? String{
-                                print(userName)
-                            }
-                            if let countOfRecipes = user["countOfResipe"] as? Int{
-                                print(countOfRecipes)
-                            }
-                            if let recipes = user["resipe"] as? Array<Any>{
-                                for element in recipes{
-                                    //print(recipe)
-                                    if let recipe = element as? Dictionary<String, Any>{
-                                        print(recipe)
-                                        if let id = recipe["id"] as? Int{
-                                            print(id)
-                                        }
-                                        if let title = recipe["title"] as? String{
-                                            print(title)
-                                        }
-                                        if let ingredience = recipe["ingredience"] as? String{
-                                            print(ingredience)
-                                        }
-                                        if let steps = recipe["steps"] as? String{
-                                            print(steps)
-                                        }
-                                        print(recipe["date"])
-                                        if let date = recipe["date"] as? Double{
-                                            let dateTransformer = DateTransform()
-                                            let dateOfCreating = dateTransformer.transformFromJSON(date)
-                                            print(dateOfCreating)
-                                        }
-                                    }
+    func getJSONFromServer() -> Promise<String>{
+        
+        return Promise<String> { fulfill, reject in
+            let url = "http://localhost:3000/users"
+            Alamofire.request(url)
+                .responseArray { (response: DataResponse<[User]>) in
+                    switch response.result {
+                    case .success(let users):
+                        do {
+                            let realm = try! Realm()
+                            try realm.write {
+                                for user in users {
+                                    print(user)
+                                    realm.add(user)
+                                    print("Success")
+                                    fulfill("Success")
                                 }
-                                
                             }
+                        } catch let error as NSError {
+                            //TODO: Handle error
                         }
+                    case .failure(let error): break
+                        //TODO: Handle error
                     }
-                }
             }
-           // print(value)
-            
         }
-//        let url = "http://localhost:3000/db"
-//        Alamofire.request(url).responseObject{ (response: DataResponse<User>) in
-//            let userResponse = response.result.value
-//            print(response)
+        
+    }
+
+    func putJSONToServer(){
+        
+        
+    }
+//    func postJSONToServer(user: User){
+//        let url = "http://localhost:3000/users"
+//        let params: [String: Any] = [
+//            "userName" : user.userName,
+//            "countOfResipe" : user.countOfResipe,
+//            "resipe" :  user.resipe.first
+//        ]
+//        let param =
+//        request(url).responseJSON{ responseJSON in
+//            switch responseJSON.result{
+//            case .success(let value):
+//                if let jsonObject = Mapper<User>().toJSON(user){
+//                    let post = Post(json: jsonObject)
+//                    print(post)
+//                }
+//                
+//            }
 //            
 //        }
-    }
-    func putJSONFromServer(){
-        
-    }
-    func postJSONFromServer(){
-        
-    }
+//    }
     
-
+    
 }

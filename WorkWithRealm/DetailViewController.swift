@@ -25,7 +25,7 @@ class DetailViewController: UIViewController {
         createrLbl.text = recipe.creater.first!.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
-        imageView.image = UIImage(data: recipe.image!)
+     //   imageView.image = UIImage(data: recipe.image!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

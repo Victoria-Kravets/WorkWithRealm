@@ -46,7 +46,7 @@ class Resipe : Object, Mappable {
         steps <- map["steps"]
         date <- (map["date"], DateTransform())
        // image <- (map["image"], DataTransform()) // ?????????????????
-        creater.first!.userName <- map["creater"]
+      //  creater.first!.userName <- map["creater"]
         
     }
 

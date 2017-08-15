@@ -46,6 +46,10 @@ class MyTableViewController: UITableViewController {
     var chef: User!
     var selectedResipe = Resipe()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fillRealm()
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -53,7 +57,7 @@ class MyTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        populateDefaultResipes()
+       // populateDefaultResipes()
         if chef != nil{
             print(chef.userName)
 //            recipes = self.query.doQueryToRecipeInRealm().filter("creater[FIRST].userName == %@", chef.userName)
@@ -64,8 +68,7 @@ class MyTableViewController: UITableViewController {
         }
 
         tableView.reloadData()
-        let jsonFile = WorkWithJSON()
-        jsonFile.getJSONFromServer()
+        
         
     }
     
@@ -74,51 +77,61 @@ class MyTableViewController: UITableViewController {
         recipes = self.query.doQueryToRecipeInRealm()
         tableView.reloadData()
     }
-    
-    func populateDefaultResipes() {
-        
-        if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
-
-            let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
-            var count = 0
-            for resipe in defaultResipes { // creating new instance for each recipe, fill properties adn adding object to realm
-
-                let newResipe = Resipe()
-                newResipe.id = count
-                newResipe.title = resipe[0]
-                newResipe.ingredience = resipe[1]
-                newResipe.steps = resipe[2]
-                let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
-                let img = UIImage(data: data as Data)
-                newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
-                newResipe.date = Date()
-                let user = User(name: resipe[4])
-                
-                try! self.realm.write {
-                    self.realm.add(user)
-                    let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
-                    userInDB?.resipe.append(newResipe)
-                    userInDB?.countOfResipe = user.resipe.count
-                }
-                
-                
-//                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
-//                    try! self.realm.write(){
-//                        user.resipe.append(savedRecipe)
-//                    }
-//                    }.catch {error in
-//                        print(error)
-//                }
-                count += 1
-            }
-            recipes = query.doQueryToRecipeInRealm()
-            let currentUsers = query.doQueryToUserInRealm()
-            let jsonFile = WorkWithJSON()
-            jsonFile.saveToJSONFile(objects: currentUsers)
-            jsonFile.saveToJSONFile(objects: recipes)
+    func fillRealm(){
+        try! self.realm.write {
+            realm.deleteAll()
+        }
+        let jsonFile = WorkWithJSON()
+        jsonFile.getJSONFromServer().then {_ in
+            self.tableView.reloadData()
         }
         
     }
+    
+//    func populateDefaultResipes() {
+//        
+//        if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
+//
+//            let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
+//            var count = 0
+//            for resipe in defaultResipes { // creating new instance for each recipe, fill properties adn adding object to realm
+//
+//                let newResipe = Resipe()
+//                newResipe.id = count
+//                newResipe.title = resipe[0]
+//                newResipe.ingredience = resipe[1]
+//                newResipe.steps = resipe[2]
+//                let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
+//                let img = UIImage(data: data as Data)
+//                newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
+//                newResipe.date = Date()
+//                let user = User(name: resipe[4])
+//                
+//                try! self.realm.write {
+//                    self.realm.add(user)
+//                    let userInDB = self.query.doQueryToUserInRealm().filter("userName = '\(user.userName)'").first
+//                    userInDB?.resipe.append(newResipe)
+//                    userInDB?.countOfResipe = user.resipe.count
+//                }
+//                
+//                
+////                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
+////                    try! self.realm.write(){
+////                        user.resipe.append(savedRecipe)
+////                    }
+////                    }.catch {error in
+////                        print(error)
+////                }
+//                count += 1
+//            }
+//            recipes = query.doQueryToRecipeInRealm()
+//            let currentUsers = query.doQueryToUserInRealm()
+//            let jsonFile = WorkWithJSON()
+//            jsonFile.saveToJSONFile(objects: currentUsers)
+//            jsonFile.saveToJSONFile(objects: recipes)
+//        }
+//        
+//    }
     
     func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
         return Promise { fulfill, reject in
