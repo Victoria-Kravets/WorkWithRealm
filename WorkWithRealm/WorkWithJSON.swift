@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 import ObjectMapper
 import Alamofire
+import AlamofireObjectMapper
+
 class WorkWithJSON{
     
     func saveToJSONFile<T>(objects: Results<T>){
@@ -53,13 +55,56 @@ class WorkWithJSON{
     func getJSONFromServer() {
         let url = "http://localhost:3000/db"
         Alamofire.request(url).responseJSON{ response in
-            let result = response.result
-            print(result)
-            let value = result.value!
-            print(value)
-          
+            if let value = response.result.value! as? Dictionary<String, Any>{
+                
+                if let users = value["users"] as? Array<Any>{
+                    for element in users{
+                        if let user = element as? Dictionary<String, Any>{
+                            print(user)
+                            if let userName = user["userName"] as? String{
+                                print(userName)
+                            }
+                            if let countOfRecipes = user["countOfResipe"] as? Int{
+                                print(countOfRecipes)
+                            }
+                            if let recipes = user["resipe"] as? Array<Any>{
+                                for element in recipes{
+                                    //print(recipe)
+                                    if let recipe = element as? Dictionary<String, Any>{
+                                        print(recipe)
+                                        if let id = recipe["id"] as? Int{
+                                            print(id)
+                                        }
+                                        if let title = recipe["title"] as? String{
+                                            print(title)
+                                        }
+                                        if let ingredience = recipe["ingredience"] as? String{
+                                            print(ingredience)
+                                        }
+                                        if let steps = recipe["steps"] as? String{
+                                            print(steps)
+                                        }
+                                        print(recipe["date"])
+                                        if let date = recipe["date"] as? Date{
+                                            print(date)
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+           // print(value)
+            
         }
-        
+//        let url = "http://localhost:3000/db"
+//        Alamofire.request(url).responseObject{ (response: DataResponse<User>) in
+//            let userResponse = response.result.value
+//            print(response)
+//            
+//        }
     }
     func putJSONFromServer(){
         
