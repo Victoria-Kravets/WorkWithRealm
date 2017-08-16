@@ -185,16 +185,24 @@ class MyTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
+            let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
+            let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
             try! realm.write() {
-                let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
                 self.realm.delete(self.recipes[indexPath.row])
-                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
                 user.countOfResipe = user.resipe.count
-                if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
-                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
-                    
-                }
             }
+            let json = WorkWithJSON()
+            json.putJSONToServer(user: user)
+            if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
+                json.deleteJSONFromServer(user: user)
+                try! realm.write() {
+                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+                }
+                
+                
+            }
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
