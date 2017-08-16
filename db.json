@@ -77,7 +77,6 @@
     },
     {
       "userName": "1",
-      "countOfResipe": 1,
       "resipe": [
         {
           "ingredience": "1",
@@ -85,9 +84,24 @@
           "date": 1502834584.202894,
           "id": 5,
           "steps": "1"
+        },
+        {
+          "ingredience": "3",
+          "title": "3",
+          "date": 1502834584.202894,
+          "id": 6,
+          "steps": "3"
+        },
+        {
+          "ingredience": "5",
+          "title": "5",
+          "date": 1502881865.136413,
+          "id": 7,
+          "steps": "5"
         }
       ],
-      "id": 5
+      "id": 5,
+      "countOfResipe": 3
     }
   ]
 }

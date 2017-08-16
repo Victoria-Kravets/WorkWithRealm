@@ -32,7 +32,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             resipeTitle.text = recipe.title
             resipeIngredients.text = recipe.ingredience
             resipeSteps.text = recipe.steps
-            resipeImage.image = UIImage(data: recipe.image!)
+            //resipeImage.image = UIImage(data: recipe.image!)
             createRecipeBtn.setTitle("Save recipe", for: .normal)
         }
     }
@@ -107,6 +107,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                     currentRecipe?.steps = steps
                     currentRecipe?.setRecipeImage(resipeImage.image!)
                 }
+                let json = WorkWithJSON()
+                let user = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!
+                json.putJSONToServer(user: user)
             }
             
         
@@ -119,7 +122,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
         var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
-        
+        print(isUserInDB)
         try! realm.write(){
             newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
             newResipe.title = title
@@ -127,20 +130,24 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.steps = steps
             newResipe.date = NSDate() as Date!
             newResipe.setRecipeImage(resipeImage.image!)
+            let json = WorkWithJSON()
             if isUserInDB != nil {
-                isUserInDB?.resipe.append(newResipe) //!!
-                isUserInDB?.countOfResipe = isUserInDB!.resipe.count
+                addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then{user in
+                    json.putJSONToServer(user: user)
+                    }
+                
             }else{
                 isUserInDB = User(name: userName)
                 self.realm.add(isUserInDB!)
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(isUserInDB!.userName)'").first
                 
-                let json = WorkWithJSON()
+                
                 addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then{ user in
-                    json.postJSONToServer(user: user).then{_ in
+                    json.postJSONToServer(user: user)
+                    }.then{_ in
                         print("User added to server DB")
-                    }
                 }
+
             }
         }
     }
@@ -149,6 +156,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         return Promise<User> { fulfill, reject in
             isUserInDB.resipe.append(newResipe)
             isUserInDB.countOfResipe = isUserInDB.resipe.count
+            fulfill(isUserInDB)
         }
         
     }

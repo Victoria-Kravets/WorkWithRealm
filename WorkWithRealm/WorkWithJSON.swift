@@ -82,8 +82,30 @@ class WorkWithJSON{
         
     }
 
-    func putJSONToServer(){
-        
+    func putJSONToServer(user: User) -> Promise<String>{
+        return Promise<String>{ fulfill, reject in
+            let url = "http://localhost:3000/users/\(user.id)"
+            print(url)
+            let realm = try! Realm()
+            try! realm.write{
+                let jsonUser = user.toJSON()
+                print(jsonUser)
+                request(url, method: .put, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
+                    
+                    switch responseJSON.result {
+                    case .success(let value):
+                        let jsonObject = responseJSON.result.value
+                        print(jsonObject)
+                        fulfill("Success")
+                        
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+
+            }
+        }
+
         
     }
     func postJSONToServer(user: User) -> Promise<String>{
