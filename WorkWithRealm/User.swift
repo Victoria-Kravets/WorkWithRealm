@@ -23,8 +23,6 @@ class User: Object, Mappable {
         set{
            count = newValue
         }
-        
-        
     }
     convenience init(name: String){
         self.init()

@@ -23,9 +23,10 @@
 		7592473C1F332BC100B39ABF /* PromiseKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7592473A1F332BC100B39ABF /* PromiseKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		759AB5FD1F3D0DB400ACEEA7 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */; };
 		759AB5FE1F3D0DB400ACEEA7 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		75A6CB6B1F448C09001CD524 /* DefaultRecipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */; };
 		75AA68521F3DED0300DF45CB /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA68511F3DED0300DF45CB /* ListTransform.swift */; };
 		75AA68561F3DFF8100DF45CB /* ListOfUsers.json in Resources */ = {isa = PBXBuildFile; fileRef = 75AA68551F3DFF8100DF45CB /* ListOfUsers.json */; };
-		75AA68581F3E14EE00DF45CB /* WorkWithJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA68571F3E14EE00DF45CB /* WorkWithJSON.swift */; };
+		75AA68581F3E14EE00DF45CB /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75AA68571F3E14EE00DF45CB /* JSONService.swift */; };
 		75B066F91F2A47A500A7D4E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */; };
 		75B066FE1F2A47A500A7D4E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FC1F2A47A500A7D4E0 /* Main.storyboard */; };
 		75B067001F2A47A500A7D4E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */; };
@@ -83,9 +84,10 @@
 		759247381F332B2F00B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		7592473A1F332BC100B39ABF /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		759AB5FC1F3D0DB400ACEEA7 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultRecipes.swift; sourceTree = "<group>"; };
 		75AA68511F3DED0300DF45CB /* ListTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
 		75AA68551F3DFF8100DF45CB /* ListOfUsers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ListOfUsers.json; sourceTree = "<group>"; };
-		75AA68571F3E14EE00DF45CB /* WorkWithJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkWithJSON.swift; sourceTree = "<group>"; };
+		75AA68571F3E14EE00DF45CB /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		75B066F51F2A47A500A7D4E0 /* WorkWithRealm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkWithRealm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		75B066FD1F2A47A500A7D4E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -168,7 +170,8 @@
 				753813661F2E1147009E86F0 /* UserTableViewController.swift */,
 				75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */,
 				75AA68511F3DED0300DF45CB /* ListTransform.swift */,
-				75AA68571F3E14EE00DF45CB /* WorkWithJSON.swift */,
+				75AA68571F3E14EE00DF45CB /* JSONService.swift */,
+				75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */,
 			);
 			path = WorkWithRealm;
 			sourceTree = "<group>";
@@ -331,7 +334,8 @@
 				753813651F2E0F38009E86F0 /* User.swift in Sources */,
 				757051C31F2B40380014B9B2 /* MyTableViewController.swift in Sources */,
 				75B066F91F2A47A500A7D4E0 /* AppDelegate.swift in Sources */,
-				75AA68581F3E14EE00DF45CB /* WorkWithJSON.swift in Sources */,
+				75AA68581F3E14EE00DF45CB /* JSONService.swift in Sources */,
+				75A6CB6B1F448C09001CD524 /* DefaultRecipes.swift in Sources */,
 				7523CE921F2BC7F0005E41C8 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

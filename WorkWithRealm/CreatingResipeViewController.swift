@@ -57,11 +57,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             if title != "" && ingredients != "" && steps != "" && user != "" {
                 if recipe == nil{
                     createRecipe()
-                    writeRecipeToJSON()
                     self.navigationController?.popViewController(animated: true)
                 }else{
                     editRecipe(recipe: recipe)
-                    writeRecipeToJSON()
                     self.navigationController?.popToRootViewController(animated: true)
                 }
             }
@@ -71,13 +69,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             }
         
     }
-    func writeRecipeToJSON(){
-        let recipes = query.doQueryToRecipeInRealm()
-        let currentUsers = query.doQueryToUserInRealm()
-        let jsonFile = WorkWithJSON()
-        jsonFile.saveToJSONFile(objects: currentUsers)
-        jsonFile.saveToJSONFile(objects: recipes)
-    }
+    
     func deleteRecipe(recipe: Resipe){
         let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
         let userName = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
@@ -87,13 +79,13 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             self.realm.delete(object)
             user.countOfResipe = user.resipe.count
         }
-        let json = WorkWithJSON()
-        json.putJSONToServer(user: user)
+        let jsonConverter = JSONService()
+        jsonConverter.putJSONToServer(user: user)
         if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!.resipe.count == 0 {
             try! realm.write {
                 self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
             }
-            json.deleteJSONFromServer(user: user)
+            jsonConverter.deleteJSONFromServer(user: user)
         }
         
     }
@@ -103,7 +95,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let ingredients = resipeIngredients.text!
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
-        var currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
+        let currentRecipe: Resipe? = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!
         
             if userName != recipe.creater.first!.userName{
                 deleteRecipe(recipe: recipe)
@@ -116,9 +108,9 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                     currentRecipe?.steps = steps
                     currentRecipe?.setRecipeImage(resipeImage.image!)
                 }
-                let json = WorkWithJSON()
+                let jsonConverter = JSONService()
                 let user = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!
-                json.putJSONToServer(user: user)
+                jsonConverter.putJSONToServer(user: user)
             }
             
         
@@ -131,7 +123,6 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let steps = resipeSteps.text!
         let userName = createrOfResipe.text!
         var isUserInDB = self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first
-        print(isUserInDB)
         try! realm.write(){
             newResipe.id = self.query.doQueryToRecipeInRealm().last!.id + 1
             newResipe.title = title
@@ -139,10 +130,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
             newResipe.steps = steps
             newResipe.date = NSDate() as Date!
             newResipe.setRecipeImage(resipeImage.image!)
-            let json = WorkWithJSON()
+            let jsonConverter = JSONService()
             if isUserInDB != nil {
                 addRecipeToUser(newResipe: newResipe, isUserInDB: isUserInDB!).then{user in
-                    json.putJSONToServer(user: user)
+                    jsonConverter.putJSONToServer(user: user)
                     }
                 
             }else{
@@ -152,7 +143,7 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
                 
                 
                 addRecipeToUser(newResipe: newResipe, isUserInDB: user!).then{ user in
-                    json.postJSONToServer(user: user)
+                    jsonConverter.postJSONToServer(user: user)
                     }.then{_ in
                         print("User added to server DB")
                 }
