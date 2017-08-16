@@ -14,7 +14,7 @@ import AlamofireObjectMapper
 import PromiseKit
 
 class WorkWithJSON{
-    
+    let realm = try! Realm()
     func saveToJSONFile<T>(objects: Results<T>){
         let realm = try! Realm()
         var arrayOfUsers = [User]()
@@ -67,26 +67,46 @@ class WorkWithJSON{
                                 for user in users {
                                     print(user)
                                     realm.add(user)
-                                    print("Success")
-                                    fulfill("Success")
+                                    fulfill("Successully filled realm")
                                 }
                             }
                         } catch let error as NSError {
-                            //TODO: Handle error
+                            print(error)
                         }
-                    case .failure(let error): break
-                        //TODO: Handle error
+                    case .failure(let error):
+                        print(error)
                     }
             }
         }
         
     }
-
-    func putJSONToServer(user: User) -> Promise<String>{
+    func deleteJSONFromServer(user: User) -> Promise<String>{
+        
         return Promise<String>{ fulfill, reject in
             let url = "http://localhost:3000/users/\(user.id)"
             print(url)
             let realm = try! Realm()
+            try! realm.write{
+                let jsonUser = user.toJSON()
+                print(jsonUser)
+                request(url, method: .delete, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
+                    
+                    switch responseJSON.result {
+                    case .success(let value):
+                        let jsonObject = responseJSON.result.value
+                        print(jsonObject)
+                        fulfill("Successully deleted")
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+            }
+        }
+    }
+    func putJSONToServer(user: User) -> Promise<String>{
+        
+        return Promise<String>{ fulfill, reject in
+            let url = "http://localhost:3000/users/\(user.id)"
             try! realm.write{
                 let jsonUser = user.toJSON()
                 print(jsonUser)
@@ -96,8 +116,7 @@ class WorkWithJSON{
                     case .success(let value):
                         let jsonObject = responseJSON.result.value
                         print(jsonObject)
-                        fulfill("Success")
-                        
+                        fulfill("Successully edited")
                     case .failure(let error):
                         print(error)
                     }
@@ -105,25 +124,25 @@ class WorkWithJSON{
 
             }
         }
-
-        
     }
     func postJSONToServer(user: User) -> Promise<String>{
+        
         return Promise<String>{ fulfill, reject in
             let url = "http://localhost:3000/users"
-            let jsonUser = user.toJSON()
-            print(jsonUser)
-            request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
-                
-                switch responseJSON.result {
-                case .success(let value):
-                    let jsonObject = responseJSON.result.value
-                    fulfill("Success")
+            try! realm.write {
+                let jsonUser = user.toJSON()
+                print(jsonUser)
+                request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
                     
-                case .failure(let error):
-                    print(error)
+                    switch responseJSON.result {
+                    case .success(let value):
+                        let jsonObject = responseJSON.result.value
+                        fulfill("Successully added")
+                    case .failure(let error):
+                        print(error)
+                    }
                 }
-            }
+            } 
         }
     }
 }

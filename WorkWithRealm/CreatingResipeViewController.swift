@@ -80,13 +80,22 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
     }
     func deleteRecipe(recipe: Resipe){
         let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
-        let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
+        let userName = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
+        let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!
+        print(user)
         try! realm.write {
             self.realm.delete(object)
-            if self.query.doQueryToUserInRealm().filter("userName = '\(user)'").first!.resipe.count == 0 {
-                self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
-            }
+            user.countOfResipe = user.resipe.count
         }
+        let json = WorkWithJSON()
+        json.putJSONToServer(user: user)
+        if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first!.resipe.count == 0 {
+            try! realm.write {
+                self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
+            }
+            json.deleteJSONFromServer(user: user)
+        }
+        
     }
     func editRecipe(recipe: Resipe){
         
@@ -171,3 +180,10 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         self.dismiss(animated: true, completion: nil)
     }
 }
+
+
+
+
+
+
+
