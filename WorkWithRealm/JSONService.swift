@@ -28,7 +28,6 @@ class JSONService{
                             let realm = try! Realm()
                             try realm.write {
                                 for user in users {
-                                    print(user)
                                     realm.add(user)
                                     fulfill("Successully filled realm")
                                 }
@@ -47,17 +46,14 @@ class JSONService{
         
         return Promise<String>{ fulfill, reject in
             let url = "http://localhost:3000/users/\(user.id)"
-            print(url)
             let realm = try! Realm()
             try! realm.write{
                 let jsonUser = user.toJSON()
-                print(jsonUser)
                 request(url, method: .delete, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
                     
                     switch responseJSON.result {
                     case .success(let value):
                         let jsonObject = responseJSON.result.value
-                        print(jsonObject)
                         fulfill("Successully deleted")
                     case .failure(let error):
                         print(error)
@@ -72,13 +68,11 @@ class JSONService{
             let url = "http://localhost:3000/users/\(user.id)"
             try! realm.write{
                 let jsonUser = user.toJSON()
-                print(jsonUser)
                 request(url, method: .put, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
                     
                     switch responseJSON.result {
                     case .success(let value):
                         let jsonObject = responseJSON.result.value
-                        print(jsonObject)
                         fulfill("Successully edited")
                     case .failure(let error):
                         print(error)
@@ -94,9 +88,7 @@ class JSONService{
             let url = "http://localhost:3000/users"
             try! realm.write {
                 let jsonUser = user.toJSON()
-                print(jsonUser)
-                request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in
-                    
+                request(url, method: .post, parameters: jsonUser, encoding: JSONEncoding.default, headers: nil).validate().responseJSON { responseJSON in                    
                     switch responseJSON.result {
                     case .success(let value):
                         let jsonObject = responseJSON.result.value

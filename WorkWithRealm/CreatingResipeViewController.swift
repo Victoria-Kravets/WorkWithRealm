@@ -74,7 +74,6 @@ class CreatingResipeViewController: UIViewController, UIImagePickerControllerDel
         let object = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)")
         let userName = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!.userName
         let user = self.query.doQueryToRecipeInRealm().filter("id = \(recipe.id)").first!.creater.first!
-        print(user)
         try! realm.write {
             self.realm.delete(object)
             user.countOfResipe = user.resipe.count

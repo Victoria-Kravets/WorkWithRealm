@@ -127,6 +127,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75A6CB6C1F4491AD001CD524 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */,
+				75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */,
+				75AA68571F3E14EE00DF45CB /* JSONService.swift */,
+				75AA68511F3DED0300DF45CB /* ListTransform.swift */,
+				75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */,
+				75B067011F2A47A500A7D4E0 /* LaunchScreen.storyboard */,
+				75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */,
+				75B067041F2A47A600A7D4E0 /* Info.plist */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		75A6CB6E1F44920C001CD524 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				75B066FC1F2A47A500A7D4E0 /* Main.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		75A6CB6F1F449216001CD524 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				757051C21F2B40380014B9B2 /* MyTableViewController.swift */,
+				7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */,
+				753813661F2E1147009E86F0 /* UserTableViewController.swift */,
+				7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		75A6CB701F44921F001CD524 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				753813641F2E0F38009E86F0 /* User.swift */,
+				757051C61F2B42B90014B9B2 /* Resipe.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		75A6CB711F449239001CD524 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */,
+				753813681F2E1156009E86F0 /* UserTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		75B066EC1F2A47A500A7D4E0 = {
 			isa = PBXGroup;
 			children = (
@@ -155,23 +207,11 @@
 		75B066F71F2A47A500A7D4E0 /* WorkWithRealm */ = {
 			isa = PBXGroup;
 			children = (
-				75B066F81F2A47A500A7D4E0 /* AppDelegate.swift */,
-				75B066FC1F2A47A500A7D4E0 /* Main.storyboard */,
-				75B066FF1F2A47A500A7D4E0 /* Assets.xcassets */,
-				75B067011F2A47A500A7D4E0 /* LaunchScreen.storyboard */,
-				75B067041F2A47A600A7D4E0 /* Info.plist */,
-				757051C21F2B40380014B9B2 /* MyTableViewController.swift */,
-				757051C61F2B42B90014B9B2 /* Resipe.swift */,
-				7523CE8B1F2B9C2C005E41C8 /* ResipeTableViewCell.swift */,
-				7523CE8F1F2BA3F7005E41C8 /* CreatingResipeViewController.swift */,
-				7523CE911F2BC7F0005E41C8 /* DetailViewController.swift */,
-				753813641F2E0F38009E86F0 /* User.swift */,
-				753813681F2E1156009E86F0 /* UserTableViewCell.swift */,
-				753813661F2E1147009E86F0 /* UserTableViewController.swift */,
-				75C607AA1F31FAEB00A3FB5D /* QueryToRealm.swift */,
-				75AA68511F3DED0300DF45CB /* ListTransform.swift */,
-				75AA68571F3E14EE00DF45CB /* JSONService.swift */,
-				75A6CB6A1F448C09001CD524 /* DefaultRecipes.swift */,
+				75A6CB711F449239001CD524 /* Cells */,
+				75A6CB701F44921F001CD524 /* Models */,
+				75A6CB6F1F449216001CD524 /* Controllers */,
+				75A6CB6E1F44920C001CD524 /* View */,
+				75A6CB6C1F4491AD001CD524 /* Utilities */,
 			);
 			path = WorkWithRealm;
 			sourceTree = "<group>";

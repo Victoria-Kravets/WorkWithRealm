@@ -32,7 +32,7 @@ class MyTableViewController: UITableViewController {
         }
     }
     
-    var chef: User!
+    var chef: String!
     var selectedResipe = Resipe()
     
     override func viewDidLoad() {
@@ -58,10 +58,7 @@ class MyTableViewController: UITableViewController {
         super.viewWillAppear(true)
        // populateDefaultResipes()
         if chef != nil{
-            print(chef)
-            recipes = self.query.doQueryToRecipeInRealm().filter("creater[FIRST].userName == %@", chef.userName)
-            recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
-            print(recipes)
+            recipes = self.query.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
         }else{
             recipes = self.query.doQueryToRecipeInRealm()
         }
