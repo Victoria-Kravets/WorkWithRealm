@@ -8,17 +8,34 @@
 
 import Foundation
 import RealmSwift
-class User: Object {
+import ObjectMapper
+
+class User: Object, Mappable {
     dynamic var userName = ""
-    var count = 0
+    dynamic var id = 0
     var resipe = List<Resipe>()
+    var count = 0
     dynamic var countOfResipe : Int{
-        count = resipe.count
-        return count
+        get{
+            count = resipe.count
+            return count
+        }
+        set{
+           count = newValue
+        }
     }
     convenience init(name: String){
         self.init()
         self.userName = name
+    }
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    func mapping(map: Map) {
+        userName <- map["userName"]
+        id <- map["id"]
+        resipe <- (map["resipe"], ListTransform<Resipe>())
+        countOfResipe <- map["countOfResipe"]
     }
     
 }

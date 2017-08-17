@@ -9,6 +9,9 @@
 import UIKit
 import RealmSwift
 import PromiseKit
+import ObjectMapper
+import Alamofire
+
 class MyTableViewController: UITableViewController {
     
     let realm = try! Realm()
@@ -26,26 +29,26 @@ class MyTableViewController: UITableViewController {
         }
         set{
             self.resipes = newValue
-            print(newValue)
-            print(resipes)
-            print(recipes)
         }
     }
-    var users: Results<User>!
-    var user: Results<User>{
-        get{
-            if users == nil{
-                users = self.query.doQueryToUserInRealm()
-            }
-            return users
-        }
-        set{
-            users = newValue
-        }
-    }
-    var chef: User!
+    
+    var chef: String!
     var selectedResipe = Resipe()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        fillRealm()
+    }
+    func fillRealm(){
+        try! self.realm.write {
+            realm.deleteAll()
+        }
+        let jsonFile = JSONService()
+        jsonFile.getJSONFromServer().then {_ in
+            self.tableView.reloadData()
+        }
+        
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
@@ -53,13 +56,12 @@ class MyTableViewController: UITableViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        populateDefaultResipes()
+       // populateDefaultResipes()
         if chef != nil{
-            recipes = self.query.doQueryToRecipeInRealm().filter("creater.userName == %@", chef.userName)
+            recipes = self.query.doQueryToRecipeInRealm().filter("ANY creater.userName = '1'")
         }else{
             recipes = self.query.doQueryToRecipeInRealm()
         }
-        
         tableView.reloadData()
     }
     
@@ -69,52 +71,12 @@ class MyTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func populateDefaultResipes() {
-        
-        if recipes.count == 0 { // if count equal 0, it means that cotegory doesn't have any record
-
-            let defaultResipes = [["Chocolate Cake", "1", "1", "ChocolateCake.jpg", "Alex Gold"], ["Pizza", "1", "1", "pizza.jpeg","Nikky Rush"], ["Gamburger", "1", "1", "gamburger.jpg", "Nick Griffin"], ["Spagetti", "1", "1", "spagetti.jpeg", "Olivia Woll"], ["Sushi", "1", "1", "sushi.jpeg", "Pamela White"]] // creating default names of categories
-            for resipe in defaultResipes { // creating new instance for each category, fill properties adn adding object to realm
-
-                let newResipe = Resipe()
-                newResipe.title = resipe[0]
-                newResipe.ingredience = resipe[1]
-                newResipe.steps = resipe[2]
-                let data = NSData(data: UIImageJPEGRepresentation(UIImage(named: resipe[3])!, 0.9)!)
-                let img = UIImage(data: data as Data)
-                newResipe.image = NSData(data: UIImagePNGRepresentation(img!)!) as Data
-                newResipe.date = Date()
-                let user = User()
-                user.userName = resipe[4]
-                newResipe.creater = user
-            
-                addResipeToDatabase(newResipe: newResipe).then { savedRecipe in
-                    try! self.realm.write(){
-                        user.resipe.append(savedRecipe)
-                    }
-                    }.catch {error in
-                        print(error)
-                }
-            }
-            recipes = query.doQueryToRecipeInRealm()
-        }
-        
-    }
     
-    func addResipeToDatabase(newResipe: Resipe) -> Promise<Resipe> {
-        return Promise { fulfill, reject in
-            try! realm.write(){
-                self.realm.add(newResipe)
-                fulfill(newResipe)
-            }
-        }
-    }
     
     @IBAction func didSelectSort(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0{
             self.recipes = self.recipes.sorted(byKeyPath: "date")
         }else{
-            print(self.recipes)
             self.recipes = self.recipes.sorted(byKeyPath: "title")
         }
         self.tableView.reloadData()
@@ -127,7 +89,6 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return recipes.count
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ResipeCell", for: indexPath) as? ResipeTableViewCell {
@@ -150,29 +111,34 @@ class MyTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            
+            let userName = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!.userName
+            let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater.first!
             try! realm.write() {
-                let user = self.query.doQueryToRecipeInRealm()[indexPath.row].creater!.userName
-                let recipeName = self.query.doQueryToRecipeInRealm()[indexPath.row].title
                 self.realm.delete(self.recipes[indexPath.row])
-                if self.query.doQueryToUserInRealm().filter("userName = '\(recipeName)'").first?.resipe.count == 0 {
-                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(user)'"))
+                user.countOfResipe = user.resipe.count
+            }
+            let jsonConverter = JSONService()
+            jsonConverter.putJSONToServer(user: user)
+            if self.query.doQueryToUserInRealm().filter("userName = '\(userName)'").first?.resipe.count == 0 {
+                jsonConverter.deleteJSONFromServer(user: user)
+                try! realm.write() {
+                    self.realm.delete(self.query.doQueryToUserInRealm().filter("userName = '\(userName)'"))
                 }
             }
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
         
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetailVC"{
-            let ditailController = segue.destination as! DetailViewController
-            ditailController.recipe = selectedResipe
+            let detailController = segue.destination as! DetailViewController
+            detailController.recipe = selectedResipe
         }
     }
-    
-    
 }

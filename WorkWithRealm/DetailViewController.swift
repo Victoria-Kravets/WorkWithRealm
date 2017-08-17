@@ -22,12 +22,18 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         titleLbl.text = recipe.title
-        createrLbl.text = recipe.creater?.userName
+        createrLbl.text = recipe.creater.first!.userName
         ingredientsLbl.text = recipe.ingredience
         stepsLbl.text = recipe.steps
-        imageView.image = UIImage(data: recipe.image!)
+     //   imageView.image = UIImage(data: recipe.image!)
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "EditRecipe"{
+            let editVC = segue.destination as! CreatingResipeViewController
+            editVC.recipe = self.recipe
+            
+        }
+    }
     
 }
